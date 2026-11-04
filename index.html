@@ -1,0 +1,2479 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Portfolio Refleksi PPL Terbimbing I - Dias Maulana</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <!-- Google Fonts: Space Grotesk & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PDF.js untuk melihat PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js">
+    </script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandRed: '#9b2226',
+                        brandRedDark: '#701518',
+                        brandRedLight: '#f6e8e8',
+                        brandCream: '#e9d8a6',
+                        brandCreamDark: '#dfcc96',
+                        brandCreamLight: '#faf6e8',
+                        neutralDark: '#2c1e1a',
+                        neutralLight: '#faf6f0',
+                        whiteWarm: '#fcfbf9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+
+
+        
+    </script>
+
+    <style>
+        .page-view {
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .hidden-view {
+            display: none !important;
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        .cozy-shadow {
+            box-shadow: 0 10px 30px -10px rgba(155, 34, 38, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02);
+        }
+        .cozy-shadow-sm {
+            box-shadow: 0 4px 15px -5px rgba(155, 34, 38, 0.05);
+        }
+        .cozy-shadow-lg {
+            box-shadow: 0 20px 40px -15px rgba(155, 34, 38, 0.12), 0 1px 5px rgba(0, 0, 0, 0.01);
+        }
+
+        @keyframes signal-pulse-1 {
+            0% {
+                transform: scale(0.6);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+        @keyframes signal-pulse-2 {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+        @keyframes signal-pulse-3 {
+            0% {
+                transform: scale(1);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: scale(2.2);
+                opacity: 0;
+            }
+        }
+        .pulse-1 {
+            animation: signal-pulse-1 2.5s infinite ease-out;
+        }
+        .pulse-2 {
+            animation: signal-pulse-2 2.5s infinite ease-out 0.8s;
+        }
+        .pulse-3 {
+            animation: signal-pulse-3 2.5s infinite ease-out 1.6s;
+        }
+
+        @keyframes neon-glow {
+            0%,
+            100% {
+                box-shadow: 0 0 15px rgba(155, 34, 38, 0.35), 0 0 30px rgba(155, 34, 38, 0.15);
+                border-color: rgba(155, 34, 38, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 28px rgba(155, 34, 38, 0.8), 0 0 48px rgba(155, 34, 38, 0.4);
+                border-color: rgba(155, 34, 38, 1);
+            }
+        }
+        .neon-avatar-glow {
+            animation: neon-glow 3s infinite ease-in-out;
+        }
+
+        @keyframes spin-orbit {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .orbit-ring {
+            animation: spin-orbit 10s linear infinite;
+        }
+
+        @keyframes pulse-signal-dot {
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(155, 34, 38, 0.8);
+            }
+            50% {
+                transform: scale(1.3);
+                box-shadow: 0 0 20px rgba(155, 34, 38, 1);
+            }
+        }
+        .signal-node {
+            animation: pulse-signal-dot 1.5s infinite ease-in-out;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #faf6f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e9d8a6;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9b2226;
+        }
+
+        /* PDF Viewer Styles */
+        .pdf-viewer {
+            background: #f5f5f5;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .pdf-controls {
+            background: #2c1e1a;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .pdf-controls button {
+            background: #9b2226;
+            color: #e9d8a6;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .pdf-controls button:hover {
+            background: #701518;
+            transform: scale(1.05);
+        }
+        .pdf-controls span {
+            color: #e9d8a6;
+            font-size: 12px;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Google Drive Preview Iframe Styling */
+        .gdrive-preview-container {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #faf6f0;
+            border: 2px solid rgba(233, 216, 166, 0.4);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px -8px rgba(155, 34, 38, 0.06);
+        }
+        .gdrive-preview-container:hover {
+            border-color: rgba(155, 34, 38, 0.35);
+            box-shadow: 0 14px 32px -10px rgba(155, 34, 38, 0.13);
+        }
+        .gdrive-preview-container iframe {
+            display: block;
+            width: 100%;
+            border: none;
+        }
+        .gdrive-preview-container .preview-label {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .gdrive-preview-container .preview-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 320px;
+            color: #9b2226;
+            text-align: center;
+            padding: 2rem;
+        }
+        .gdrive-preview-container .preview-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Foto galeri */
+        .foto-galeri-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid rgba(233, 216, 166, 0.35);
+            transition: all 0.3s ease;
+            aspect-ratio: 4/3;
+            background: #faf6f0;
+        }
+        .foto-galeri-item:hover {
+            border-color: rgba(155, 34, 38, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px -10px rgba(155, 34, 38, 0.18);
+        }
+        .foto-galeri-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .foto-galeri-item .foto-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(44, 30, 26, 0.7) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+        }
+        .foto-galeri-item:hover .foto-overlay {
+            opacity: 1;
+        }
+
+        /* Video container */
+        .video-embed-container {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #1a1a1a;
+            border: 2px solid rgba(233, 216, 166, 0.35);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px -8px rgba(155, 34, 38, 0.08);
+        }
+        .video-embed-container:hover {
+            border-color: rgba(155, 34, 38, 0.5);
+            box-shadow: 0 14px 32px -10px rgba(155, 34, 38, 0.16);
+        }
+        .video-embed-container iframe {
+            display: block;
+            width: 100%;
+            border: none;
+        }
+        .aspect-ratio-16-9 {
+            aspect-ratio: 16/9;
+        }
+
+        /* PPL Mandiri: komponen tambahan dengan palet dan nuansa UI yang sama */
+        .ppl-view-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .6rem;
+            padding: .85rem 1.1rem;
+            border: 1px solid rgba(233, 216, 166, .6);
+            border-radius: 13px;
+            color: #2c1e1a;
+            background: #fcfbf9;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: .82rem;
+            font-weight: 700;
+            transition: all .2s ease;
+        }
+        .ppl-view-btn:hover {
+            border-color: rgba(155, 34, 38, .4);
+            background: #faf6e8;
+            transform: translateY(-1px);
+        }
+        .ppl-view-btn.is-active {
+            color: #e9d8a6;
+            background: #9b2226;
+            border-color: #9b2226;
+            box-shadow: 0 8px 20px rgba(155, 34, 38, .12);
+        }
+        .ppl-cycle-btn {
+            padding: .85rem 1rem;
+            border: 1px solid rgba(233, 216, 166, .55);
+            border-radius: 13px;
+            color: #2c1e1a;
+            background: #fcfbf9;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: .82rem;
+            font-weight: 700;
+            transition: all .2s ease;
+        }
+        .ppl-cycle-btn span { font-size: .68rem; font-weight: 600; opacity: .65; }
+        .ppl-cycle-btn:hover, .ppl-category-btn:hover {
+            border-color: rgba(155, 34, 38, .4);
+            background: #faf6e8;
+            transform: translateY(-1px);
+        }
+        .ppl-cycle-btn.is-active, .ppl-category-btn.is-active {
+            color: #e9d8a6;
+            background: #9b2226;
+            border-color: #9b2226;
+            box-shadow: 0 8px 20px rgba(155, 34, 38, .12);
+        }
+        .ppl-category-btn {
+            display: flex;
+            min-height: 72px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: .7rem .4rem;
+            border: 1px solid rgba(233, 216, 166, .55);
+            border-radius: 13px;
+            color: #2c1e1a;
+            background: #fcfbf9;
+            font-size: .68rem;
+            line-height: 1.25;
+            font-weight: 700;
+            transition: all .2s ease;
+        }
+        .ppl-category-btn i { color: #9b2226; font-size: 1rem; }
+        .ppl-category-btn.is-active i { color: #e9d8a6; }
+        .ppl-resource-card {
+            overflow: hidden;
+            border: 1px solid rgba(233, 216, 166, .45);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 8px 24px -14px rgba(44, 30, 26, .18);
+        }
+        .ppl-resource-preview {
+            width: 100%;
+            height: 520px;
+            border: 0;
+            display: block;
+            background: #f5f5f5;
+        }
+        .ppl-action-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            padding: .65rem .9rem;
+            border-radius: 10px;
+            background: #9b2226;
+            color: #e9d8a6;
+            font-size: .72rem;
+            font-weight: 700;
+            transition: background .2s ease, transform .2s ease;
+        }
+        .ppl-action-link:hover { background: #701518; transform: translateY(-1px); }
+        .ppl-action-link.ppl-secondary {
+            color: #9b2226;
+            background: #faf6e8;
+            border: 1px solid rgba(233, 216, 166, .65);
+        }
+        .ppl-action-link.ppl-secondary:hover { background: #f6e8e8; }
+        .ppl-analysis-preview { width: 100%; height: 250px; border: 0; display: block; background: #f5f5f5; }
+        .ppl-video-frame {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: 0;
+            display: block;
+            background: #1a1a1a;
+        }
+        @media (max-width: 640px) {
+            .ppl-resource-preview { height: 420px; }
+        }
+    
+
+        /* =====================================================
+           FITUR TAMBAHAN — tetap mengikuti palet visual awal
+           ===================================================== */
+        #portfolio-reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            z-index: 1200;
+            pointer-events: none;
+            background: transparent;
+        }
+        #portfolio-reading-progress-bar {
+            width: 0;
+            height: 100%;
+            background: #9b2226;
+            box-shadow: 0 0 8px rgba(155, 34, 38, .35);
+            transition: width .12s ease-out;
+        }
+        .portfolio-floating-tools {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 80;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .portfolio-tool-button {
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(233, 216, 166, .85);
+            border-radius: 15px;
+            color: #e9d8a6;
+            background: #9b2226;
+            box-shadow: 0 8px 22px rgba(44, 30, 26, .16);
+            cursor: pointer;
+            transition: transform .2s ease, background .2s ease, opacity .2s ease;
+        }
+        .portfolio-tool-button:hover {
+            transform: translateY(-3px);
+            background: #701518;
+        }
+        #portfolio-top-button {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            pointer-events: none;
+        }
+        #portfolio-top-button.is-visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .portfolio-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            background: rgba(44, 30, 26, .72);
+            backdrop-filter: blur(5px);
+        }
+        .portfolio-overlay.is-open { display: flex; }
+        .portfolio-search-dialog {
+            width: min(100%, 680px);
+            max-height: min(82vh, 760px);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(233, 216, 166, .55);
+            border-radius: 22px;
+            background: #fcfbf9;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, .28);
+        }
+        .portfolio-search-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(44, 30, 26, .1);
+        }
+        .portfolio-search-head input {
+            width: 100%;
+            min-width: 0;
+            border: 0;
+            outline: 0;
+            color: #2c1e1a;
+            background: transparent;
+            font: 500 14px Inter, sans-serif;
+        }
+        .portfolio-search-head input::placeholder { color: rgba(44, 30, 26, .45); }
+        .portfolio-shortcut {
+            flex: 0 0 auto;
+            padding: 4px 7px;
+            border: 1px solid rgba(44, 30, 26, .15);
+            border-radius: 7px;
+            color: rgba(44, 30, 26, .6);
+            background: #faf6f0;
+            font: 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+        #portfolio-search-results {
+            overflow-y: auto;
+            padding: 10px;
+        }
+        .portfolio-search-result {
+            width: 100%;
+            display: block;
+            padding: 12px 14px;
+            border: 1px solid transparent;
+            border-radius: 13px;
+            color: #2c1e1a;
+            background: transparent;
+            text-align: left;
+            cursor: pointer;
+            transition: background .18s ease, border-color .18s ease;
+        }
+        .portfolio-search-result:hover,
+        .portfolio-search-result:focus-visible {
+            outline: none;
+            border-color: rgba(155, 34, 38, .16);
+            background: #faf6e8;
+        }
+        .portfolio-search-result strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #9b2226;
+            font: 700 12px 'Space Grotesk', sans-serif;
+        }
+        .portfolio-search-result span {
+            display: -webkit-box;
+            overflow: hidden;
+            color: rgba(44, 30, 26, .78);
+            font: 500 12px/1.55 Inter, sans-serif;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        .portfolio-search-empty {
+            padding: 30px 18px;
+            color: rgba(44, 30, 26, .55);
+            text-align: center;
+            font-size: 12px;
+        }
+        .portfolio-search-foot {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 11px 18px;
+            border-top: 1px solid rgba(44, 30, 26, .1);
+            color: rgba(44, 30, 26, .55);
+            background: #faf6f0;
+            font-size: 10px;
+        }
+        .portfolio-lightbox-card {
+            position: relative;
+            width: min(100%, 1050px);
+            max-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(233, 216, 166, .5);
+            border-radius: 18px;
+            background: #fcfbf9;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, .35);
+        }
+        .portfolio-lightbox-image-wrap {
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: #2c1e1a;
+        }
+        #portfolio-lightbox-image {
+            display: block;
+            max-width: 100%;
+            max-height: 72vh;
+            object-fit: contain;
+        }
+        .portfolio-lightbox-caption {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 18px;
+            color: #2c1e1a;
+            font: 700 12px 'Space Grotesk', sans-serif;
+        }
+        .portfolio-lightbox-caption a {
+            flex: 0 0 auto;
+            padding: 8px 12px;
+            border-radius: 9px;
+            color: #e9d8a6;
+            background: #9b2226;
+            font: 700 11px Inter, sans-serif;
+        }
+        .portfolio-lightbox-caption a:hover { background: #701518; }
+        .portfolio-lightbox-close,
+        .portfolio-lightbox-nav {
+            position: absolute;
+            z-index: 2;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(233, 216, 166, .5);
+            border-radius: 12px;
+            color: #e9d8a6;
+            background: rgba(44, 30, 26, .8);
+            cursor: pointer;
+        }
+        .portfolio-lightbox-close { top: 12px; right: 12px; }
+        .portfolio-lightbox-nav { top: 50%; transform: translateY(-50%); }
+        #portfolio-lightbox-prev { left: 12px; }
+        #portfolio-lightbox-next { right: 12px; }
+        .portfolio-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            z-index: 1300;
+            max-width: calc(100vw - 32px);
+            padding: 10px 16px;
+            border: 1px solid rgba(233, 216, 166, .35);
+            border-radius: 12px;
+            color: #e9d8a6;
+            background: #2c1e1a;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+            font: 600 12px Inter, sans-serif;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, 12px);
+            transition: opacity .2s ease, transform .2s ease;
+        }
+        .portfolio-toast.is-visible {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+        .portfolio-search-highlight {
+            outline: 3px solid rgba(155, 34, 38, .45) !important;
+            outline-offset: 5px;
+            border-radius: 8px;
+            animation: portfolio-highlight-pulse 1.4s ease-in-out 2;
+        }
+        @keyframes portfolio-highlight-pulse {
+            0%, 100% { outline-color: rgba(155, 34, 38, .25); }
+            50% { outline-color: rgba(155, 34, 38, .85); }
+        }
+        @media (max-width: 640px) {
+            .portfolio-floating-tools { right: 14px; bottom: 14px; gap: 8px; }
+            .portfolio-tool-button { width: 42px; height: 42px; border-radius: 13px; }
+            .portfolio-search-dialog { max-height: 86vh; border-radius: 17px; }
+            .portfolio-search-head { padding: 14px; }
+            .portfolio-search-foot { flex-direction: column; gap: 4px; }
+            .portfolio-lightbox-image-wrap { padding: 12px; }
+            #portfolio-lightbox-image { max-height: 68vh; }
+            .portfolio-lightbox-caption { align-items: flex-start; flex-direction: column; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .portfolio-tool-button,
+            .portfolio-search-result,
+            .portfolio-toast { transition: none; }
+            .portfolio-search-highlight { animation: none; }
+        }
+
+    </style>
+</head>
+<body class="bg-neutralLight text-neutralDark font-sans selection:bg-brandCream selection:text-brandRed antialiased flex flex-col min-h-screen">
+
+    <!-- LOADING SCREEN START -->
+    <div id="loading-page" class="fixed inset-0 z-[100] bg-brandCreamLight flex flex-col items-center justify-center transition-opacity duration-500">
+        <div class="relative w-64 h-64 flex items-center justify-center bg-whiteWarm rounded-full cozy-shadow-lg border border-brandCream/30">
+            <div class="absolute w-48 h-48 border-2 border-brandRed/40 rounded-full pulse-3"></div>
+            <div class="absolute w-36 h-36 border-2 border-brandRed/50 rounded-full pulse-2"></div>
+            <div class="absolute w-24 h-24 border-2 border-brandRed/60 rounded-full pulse-1"></div>
+
+            <svg class="w-16 h-16 text-brandRed z-10 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a1 1 0 0 1 1 1v12a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1Z" />
+                <path d="M12 17a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
+                <path d="M5 8c0-3.87 3.13-7 7-7s7 3.13 7 7" />
+                <path d="M8 11c0-2.21 1.79-4 4-4s4 1.79 4 4" />
+            </svg>
+        </div>
+
+        <div class="text-center mt-8 px-6 max-w-sm">
+            <p class="text-brandRed font-display font-bold text-lg tracking-wider uppercase">
+                Mohon Tunggu
+            </p>
+            <p class="text-neutralDark/80 font-medium text-sm mt-1 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-wifi animate-bounce text-brandRed"></i> Sedang Mencari Signal...!
+            </p>
+
+            <div class="mt-4 text-xs font-mono font-bold bg-whiteWarm px-3 py-1 inline-block rounded-full border border-brandCream">
+                SIGNAL STRENGTH: <span id="loading-percent" class="text-brandRed">0%</span>
+            </div>
+
+            <div class="w-48 h-1.5 bg-brandCream/20 mx-auto mt-4 overflow-hidden rounded-full relative">
+                <div id="loading-bar" class="h-full bg-brandRed rounded-full transition-all duration-100" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+    <!-- LOADING SCREEN END -->
+
+    <!-- NAVIGATION START -->
+    <nav class="sticky top-0 z-50 bg-whiteWarm border-b border-brandCream/30 cozy-shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateToPage('home')">
+                    <div class="p-2.5 bg-brandRed text-brandCream font-display font-bold text-xl rounded-xl shadow-sm hover:scale-105 transition-all">
+                        DM
+                    </div>
+                    <div>
+                        <h1 class="font-display font-bold text-base md:text-lg tracking-wide leading-tight text-neutralDark">DIAS MAULANA</h1>
+                        <p class="text-[11px] text-brandRed font-semibold">PPL I SMAN 1 Depok • PPG UNY</p>
+                    </div>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-1 font-display font-medium text-sm">
+                    <button onclick="navigateToPage('home')" id="nav-home" class="nav-link px-4 py-2 text-brandRed bg-brandRedLight rounded-lg font-bold transition-all">Beranda</button>
+                    <button onclick="navigateToPage('profil')" id="nav-profil" class="nav-link px-4 py-2 text-neutralDark/75 hover:text-brandRed hover:bg-neutralLight rounded-lg transition-all">Profil & Daerah</button>
+                    <button onclick="navigateToPage('artefak')" id="nav-artefak" class="nav-link px-4 py-2 text-neutralDark/75 hover:text-brandRed hover:bg-neutralLight rounded-lg transition-all">Artefak & Analisis</button>
+                    <button onclick="navigateToPage('penilaian')" id="nav-penilaian" class="nav-link px-4 py-2 text-neutralDark/75 hover:text-brandRed hover:bg-neutralLight rounded-lg transition-all">Hasil Penilaian</button>
+                    <button onclick="navigateToPage('refleksi')" id="nav-refleksi" class="nav-link px-4 py-2 text-neutralDark/75 hover:text-brandRed hover:bg-neutralLight rounded-lg transition-all">Refleksi Akhir</button>
+                    <button onclick="navigateToPage('ppl-mandiri')" id="nav-ppl-mandiri" class="nav-link px-4 py-2 text-neutralDark/75 hover:text-brandRed hover:bg-neutralLight rounded-lg transition-all">PPL Mandiri</button>
+                    <button onclick="navigateToPage('kontak')" id="nav-kontak" class="ml-4 px-5 py-2.5 bg-brandRed text-brandCream hover:bg-brandRedDark hover:text-white rounded-xl font-bold transition-all shadow-sm flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane text-xs"></i> Kontak Saya
+                    </button>
+                </div>
+
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-neutralDark p-2.5 rounded-xl hover:bg-neutralLight transition-all">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-drawer" class="hidden lg:hidden bg-whiteWarm border-t border-brandCream/30 px-4 py-6 space-y-2">
+            <button onclick="navigateToPage('home'); toggleMobileMenu()" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-xl text-brandRed font-display font-bold bg-brandRedLight">Beranda</button>
+            <button onclick="navigateToPage('profil'); toggleMobileMenu()" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-xl text-neutralDark/75 font-display font-medium hover:bg-neutralLight">Profil & Daerah</button>
+            <button onclick="navigateToPage('artefak'); toggleMobileMenu()" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-xl text-neutralDark/75 font-display font-medium hover:bg-neutralLight">Artefak & Analisis</button>
+            <button onclick="navigateToPage('penilaian'); toggleMobileMenu()" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-xl text-neutralDark/75 font-display font-medium hover:bg-neutralLight">Hasil Penilaian</button>
+            <button onclick="navigateToPage('refleksi'); toggleMobileMenu()" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-xl text-neutralDark/75 font-display font-medium hover:bg-neutralLight">Refleksi Akhir</button>
+            <button onclick="navigateToPage('ppl-mandiri'); toggleMobileMenu()" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-xl text-neutralDark/75 font-display font-medium hover:bg-neutralLight">PPL Mandiri</button>
+            <button onclick="navigateToPage('kontak'); toggleMobileMenu()" class="mobile-nav-link block w-full text-center mt-4 px-4 py-3 bg-brandRed text-brandCream hover:bg-brandRedDark font-display font-bold rounded-xl shadow-sm transition-all">Kontak Saya</button>
+        </div>
+    </nav>
+    <!-- NAVIGATION END -->
+
+    <!-- MAIN CONTENT AREA START -->
+    <main class="flex-grow">
+
+        <!-- MENU VIEW: HOME / BERANDA -->
+        <section id="view-home" class="page-view py-12 lg:py-20 flex items-center bg-neutralLight">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="inline-block px-4 py-1.5 bg-brandRedLight text-brandRed text-xs font-bold tracking-wider uppercase rounded-full">
+                            E-Portfolio Refleksi Awal PPL
+                        </span>
+
+                        <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-neutralDark leading-tight">
+                            Mendidik dengan <span class="bg-brandCream/40 px-2 rounded-lg text-brandRed">Logika</span>,<br>Menginspirasi dengan <span class="bg-brandRed text-brandCream px-2 rounded-lg">Hati</span>.
+                        </h1>
+
+                        <p class="text-sm sm:text-base text-neutralDark/80 leading-relaxed font-sans font-medium">
+                            Selamat datang di ruang refleksi digital saya. Sebagai calon pendidik profesional bidang <span class="font-bold text-brandRed">Informatika</span> dari Universitas Negeri Yogyakarta, portofolio ini menyajikan perjalanan teoretis, implementasi praktis di SMAN 1 Depok, serta dinamika komprehensif dalam menyelaraskan teknologi dan pedagogi humanis demi mencerdaskan generasi masa depan.
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                            <div class="p-4 bg-whiteWarm rounded-2xl cozy-shadow border border-brandCream/10 hover:border-brandRed/20 transition-all">
+                                <i class="fa-solid fa-graduation-cap text-brandRed text-xl mb-2"></i>
+                                <p class="text-[10px] text-neutralDark/50 uppercase font-bold tracking-wider">Pendidikan</p>
+                                <p class="text-xs font-bold text-neutralDark mt-0.5">PPG Prajabatan UNY</p>
+                            </div>
+                            <div class="p-4 bg-whiteWarm rounded-2xl cozy-shadow border border-brandCream/10 hover:border-brandRed/20 transition-all">
+                                <i class="fa-solid fa-school text-brandRed text-xl mb-2"></i>
+                                <p class="text-[10px] text-neutralDark/50 uppercase font-bold tracking-wider">Lokasi PPL</p>
+                                <p class="text-xs font-bold text-neutralDark mt-0.5">SMAN 1 Depok, Sleman</p>
+                            </div>
+                            <div class="p-4 bg-whiteWarm rounded-2xl cozy-shadow border border-brandCream/10 hover:border-brandRed/20 transition-all">
+                                <i class="fa-solid fa-laptop-code text-brandRed text-xl mb-2"></i>
+                                <p class="text-[10px] text-neutralDark/50 uppercase font-bold tracking-wider">Keahlian Utama</p>
+                                <p class="text-xs font-bold text-neutralDark mt-0.5">Informatika</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                            <button onclick="navigateToPage('profil')" class="px-8 py-4 bg-brandRed text-brandCream hover:bg-brandRedDark hover:text-white font-bold rounded-2xl cozy-shadow transition-all text-center">
+                                Mulai Jelajahi Refleksi
+                            </button>
+                            <button onclick="navigateToPage('artefak')" class="px-8 py-4 bg-whiteWarm text-neutralDark hover:bg-brandCreamLight font-bold rounded-2xl cozy-shadow-sm border border-brandCream transition-all text-center">
+                                Lihat Dokumen Artefak
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Avatar dengan foto profil langsung -->
+                    <div class="lg:col-span-5 flex justify-center items-center py-6">
+                        <div class="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
+
+                            <div class="absolute w-56 h-56 sm:w-72 sm:h-72 rounded-full bg-brandCream/20 border border-brandCream/30"></div>
+
+                            <div class="absolute w-48 h-48 sm:w-64 sm:h-64 rounded-full border border-dashed border-brandRed/40 orbit-ring">
+                                <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-brandRed rounded-full border border-brandCream flex items-center justify-center signal-node">
+                                    <span class="w-1.5 h-1.5 bg-brandCream rounded-full"></span>
+                                </div>
+                            </div>
+
+                            <div class="w-36 h-36 sm:w-48 sm:h-48 rounded-full border-2 border-brandRed bg-brandCreamLight flex items-center justify-center relative neon-avatar-glow cozy-shadow-lg overflow-hidden">
+                                <img src="diasm.png">
+                            </div>
+
+                            <div class="absolute -bottom-2 bg-brandRed text-brandCream text-[11px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-full border border-brandCream cozy-shadow-md">
+                                Dias Maulana
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- MENU VIEW: PROFIL & DAERAH -->
+        <section id="view-profil" class="page-view hidden-view py-16 lg:py-24 bg-whiteWarm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="max-w-3xl mx-auto text-center mb-16">
+                    <span class="px-4 py-1.5 bg-brandRedLight text-brandRed text-xs font-bold tracking-wider uppercase rounded-full">FONDASI KARAKTER</span>
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-neutralDark mt-4">
+                        Profil Pendidik & Daerah Asal
+                    </h2>
+                    <div class="w-16 h-1 bg-brandRed mx-auto mt-4 rounded-full"></div>
+                    <p class="text-neutralDark/80 mt-4 leading-relaxed font-sans text-sm sm:text-base font-medium">
+                        Refleksi awal dimulai dari memahami jati diri, akar budaya asal, serta panggilan pengabdian moral untuk menapaki jalan profesi sebagai guru pembelajar.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="p-6 bg-brandCreamLight border border-brandCream/30 rounded-2xl cozy-shadow">
+                            <h3 class="font-display font-bold text-lg text-neutralDark mb-3 flex items-center">
+                                <i class="fa-solid fa-map-location-dot mr-3 text-brandRed"></i> Asal Usul & Akar Budaya
+                            </h3>
+                            <p class="text-sm sm:text-base text-neutralDark/90 leading-relaxed font-sans font-medium">
+                           Saya lahir di Desa Gunung Agung Pauh, Kota Pagar Alam, Provinsi Sumatera Selatan pada tanggal 2 Agustus 1996. Saya menempuh pendidikan dasar hingga menengah atas di Kota Pagar Alam, sebuah daerah yang berada di kaki Gunung Dempo dengan hamparan kebun kopi dan udara pegunungan yang sejuk. Lingkungan tempat saya tumbuh mengajarkan nilai kerja keras, disiplin, dan ketekunan melalui kehidupan masyarakat yang sebagian besar bekerja di sektor pertanian. Dari mereka, saya belajar bahwa setiap keberhasilan membutuhkan proses, kesabaran, dan usaha yang konsisten.
+
+Selain keindahan alamnya, Kota Pagar Alam juga memiliki budaya gotong royong, rasa hormat kepada orang tua, dan kepedulian terhadap sesama yang masih terjaga hingga kini. Nilai-nilai tersebut membentuk karakter saya dan memengaruhi cara saya menjalankan profesi sebagai guru. Dalam proses pembelajaran, saya berusaha menanamkan sikap disiplin, tanggung jawab, kerja sama, dan semangat belajar kepada peserta didik. Bagi saya, tanah kelahiran bukan hanya tempat asal, tetapi juga fondasi yang membentuk jati diri dan filosofi saya sebagai pendidik. </p>
+                          </div>
+
+                        <div class="p-6 bg-white border border-brandRed/10 rounded-2xl cozy-shadow space-y-4">
+                            <h3 class="font-display font-bold text-lg text-brandRed flex items-center">
+                                <i class="fa-solid fa-fire-flame-curved mr-3"></i> Inspirasi & Visi Menjadi Guru
+                            </h3>
+                            <p class="text-sm sm:text-base text-neutralDark/90 leading-relaxed font-sans font-medium">
+                                Inspirasi saya menjadi guru Informatika tumbuh dari kesadaran akan kesenjangan akses teknologi digital antara kota besar dan daerah. Saya ingin menjadi jembatan computational thinking bagi generasi muda. Menjadi guru profesional bagi saya bukan sekadar mentransfer teori jaringan atau pemrograman, melainkan membentuk <em>growth mindset</em> siswa agar adaptif terhadap perubahan teknologi.
+                            </p>
+                            <p class="text-sm sm:text-base text-neutralDark/90 leading-relaxed font-sans font-medium">
+                                Melalui perkuliahan PPG di Universitas Negeri Yogyakarta dan kancah PPL di SMAN 1 Depok, saya mendedikasikan diri untuk meramu rancangan pembelajaran bermutu tinggi dengan pendekatan yang adil, responsif, dan berbasis kebutuhan riil siswa di kelas.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 space-y-6">
+                        <h3 class="font-display font-bold text-lg text-neutralDark uppercase tracking-wider mb-6 pb-2 border-b-2 border-brandRed/20">
+                            3 Keunikan Kota Pagaralam
+                        </h3>
+
+                        <div class="flex gap-4 p-5 bg-white border border-brandCream/15 rounded-2xl cozy-shadow-sm items-start">
+                            <div class="relative flex-shrink-0">
+                                <div class="w-20 h-20 rounded-xl overflow-hidden shadow-md">
+                                    <img src="gunungdempo.jpg">
+                                </div>
+                                <div class="absolute -top-2 -left-2 w-7 h-7 rounded-lg bg-brandRed text-brandCream flex items-center justify-center font-bold text-sm shadow-md border-2 border-white">1</div>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold text-base text-neutralDark">Negeri di Atas Awan & Gunung Dempo</h4>
+                                <p class="text-xs sm:text-sm text-neutralDark/70 mt-1 font-medium leading-relaxed">
+                               Kota Pagar Alam dianugerahi bentang alam pegunungan yang indah dengan udara yang sejuk dan pemandangan yang memanjakan mata. Dari berbagai sudut kota, terutama pada pagi hari, hamparan awan dan kabut putih sering terlihat menyelimuti lembah serta perbukitan di sekitarnya, menciptakan pemandangan yang seolah-olah berada di atas awan tanpa harus mendaki hingga ke puncak gunung. Keindahan alam tersebut semakin sempurna dengan kehadiran Gunung Dempo yang berdiri megah sebagai ikon utama kota, dikelilingi hamparan kebun teh dan perkebunan kopi yang menjadi sumber penghidupan masyarakat setempat. Bagi masyarakat Pagar Alam, Gunung Dempo bukan hanya memperindah lanskap daerah, tetapi juga menjadi simbol keteguhan, kerja keras, dan kesabaran. Tumbuh dan besar dengan latar pemandangan Gunung Dempo setiap hari memberikan saya pelajaran bahwa setiap keberhasilan membutuhkan proses, ketekunan, dan semangat untuk terus berkembang, sebagaimana alam yang senantiasa menjaga keindahan dan keseimbangannya sepanjang waktu.
+                              </p>
+                                
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 p-5 bg-white border border-brandCream/15 rounded-2xl cozy-shadow-sm items-start">
+                            <div class="relative flex-shrink-0">
+                                <div class="w-20 h-20 rounded-xl overflow-hidden shadow-md">
+                                    <img src="situs.jpeg">
+                                </div>
+                                <div class="absolute -top-2 -left-2 w-7 h-7 rounded-lg bg-brandRed text-brandCream flex items-center justify-center font-bold text-sm shadow-md border-2 border-white">2</div>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold text-base text-neutralDark">Situs Megalitikumnya salah satu terbanyak di indonesia</h4>
+                                <p class="text-xs sm:text-sm text-neutralDark/70 mt-1 font-medium leading-relaxed">
+                                    Pagar Alam merupakan salah satu daerah di Indonesia yang memiliki kekayaan situs megalitikum terbanyak dan paling beragam. Di berbagai wilayahnya dapat ditemukan ratusan peninggalan purbakala berupa arca batu, menhir, dolmen, batu datar, hingga kubur batu yang tersebar di kawasan perbukitan dan lembah. Keberadaan situs-situs tersebut menjadi bukti bahwa wilayah Pagar Alam telah menjadi pusat kehidupan dan peradaban manusia sejak ribuan tahun yang lalu. Keunikan arca-arca megalitik di Pagar Alam terletak pada bentuknya yang ekspresif dan berbeda dengan peninggalan megalitik di daerah lain, sehingga memiliki nilai sejarah dan budaya yang sangat tinggi.
+                                </p>
+                                <P></P>
+                                
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 p-5 bg-white border border-brandCream/15 rounded-2xl cozy-shadow-sm items-start">
+                            <div class="relative flex-shrink-0">
+                                <div class="w-20 h-20 rounded-xl overflow-hidden shadow-md">
+                                    <img src="curup.jpg">
+                                </div>
+                                <div class="absolute -top-2 -left-2 w-7 h-7 rounded-lg bg-brandRed text-brandCream flex items-center justify-center font-bold text-sm shadow-md border-2 border-white">3</div>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold text-base text-neutralDark">Kota Seribu Air Terjun (Cuhup)</h4>
+                                <p class="text-xs sm:text-sm text-neutralDark/70 mt-1 font-medium leading-relaxed">
+                                    Pagar Alam dikenal sebagai daerah yang kaya akan keindahan alam, salah satunya melalui keberadaan puluhan air terjun atau yang oleh masyarakat setempat disebut cuhup. Terletak di kawasan pegunungan yang subur di sekitar Gunung Dempo, aliran air yang jernih dan segar mengalir melalui tebing-tebing alami, menciptakan panorama yang memukau dan menenangkan. Beberapa air terjun yang terkenal, seperti Cuhup Embun dan Cuhup Mangkok, menjadi daya tarik wisata yang banyak dikunjungi karena keindahan alamnya yang masih alami. Keberadaan berbagai cuhup ini tidak hanya memperkaya pesona wisata Pagar Alam, tetapi juga menjadi bagian dari identitas daerah yang mencerminkan kekayaan sumber daya alam, kesejukan lingkungan pegunungan, serta keharmonisan kehidupan masyarakat dengan alam yang terus dijaga dan dilestarikan hingga saat ini.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-16 text-center max-w-4xl mx-auto p-8 bg-brandCreamLight border border-brandCream/30 rounded-2xl relative cozy-shadow">
+                    <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brandRed text-brandCream px-6 py-1 rounded-full font-bold uppercase tracking-wider text-[10px]">
+                        Kutipan Filosofi Mengajar
+                    </span>
+                    <p class="font-display font-medium text-lg sm:text-xl lg:text-2xl text-neutralDark italic mt-4 leading-relaxed">
+                        "Teknologi hanyalah alat penunjang efektivitas. Namun dalam memantik gairah rasa ingin tahu, kolaborasi aktif, serta ketajaman nalar kritis siswa, sosok gurulah kunci utamanya."
+                    </p>
+                    <p class="text-xs font-bold text-brandRed mt-4 uppercase tracking-widest">- Dias Maulana</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== MENU VIEW: ARTEFAK & ANALISIS ==================== -->
+        <section id="view-artefak" class="page-view hidden-view py-16 lg:py-24 bg-neutralLight">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="max-w-3xl mx-auto text-center mb-16">
+                    <span class="px-4 py-1.5 bg-brandRedLight text-brandRed text-xs font-bold tracking-wider uppercase rounded-full">KARYA AKADEMIS</span>
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-neutralDark mt-4">
+                        Analisis Artefak Produk Perangkat Pembelajaran
+                    </h2>
+                    <div class="w-16 h-1 bg-brandRed mx-auto mt-4 rounded-full"></div>
+                    <p class="text-neutralDark/80 mt-4 leading-relaxed text-sm sm:text-base font-medium">
+                        Daftar produk perangkat ajar berstandar tinggi yang diterapkan di SMAN 1 Depok selama 3 siklus. Setiap artefak diuraikan secara mendalam berdasarkan landasan pedagogis ilmiah, dilengkapi pratinjau dokumen dan media dari Google Drive.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-10 max-w-5xl mx-auto">
+                    <button onclick="switchTab('tab-modul')" id="btn-tab-modul" class="artifact-tab-btn p-3 bg-brandRed text-brandCream font-display font-bold text-xs sm:text-sm rounded-xl border border-brandRed/10 shadow-sm transition-all">
+                        <i class="fa-solid fa-file-invoice mr-2"></i>Siklus 1
+                    </button>
+                    <button onclick="switchTab('tab-media')" id="btn-tab-media" class="artifact-tab-btn p-3 bg-whiteWarm text-neutralDark font-display font-bold text-xs sm:text-sm rounded-xl border border-brandCream/25 shadow-sm transition-all hover:bg-brandCreamLight">
+                        <i class="fa-solid fa-laptop mr-2 text-brandRed"></i>Siklus 2
+                    </button>
+                    <button onclick="switchTab('tab-kerja')" id="btn-tab-kerja" class="artifact-tab-btn p-3 bg-whiteWarm text-neutralDark font-display font-bold text-xs sm:text-sm rounded-xl border border-brandCream/25 shadow-sm transition-all hover:bg-brandCreamLight">
+                        <i class="fa-solid fa-sheet-plastic mr-2 text-brandRed"></i>Siklus 3
+                    </button>
+                    <button onclick="switchTab('tab-video')" id="btn-tab-video" class="artifact-tab-btn p-3 bg-whiteWarm text-neutralDark font-display font-bold text-xs sm:text-sm rounded-xl border border-brandCream/25 shadow-sm transition-all hover:bg-brandCreamLight">
+                        <i class="fa-solid fa-circle-play mr-2 text-brandRed"></i>Dokumentasi
+                    </button>
+                </div>
+
+                <div class="bg-whiteWarm border border-brandCream/20 rounded-3xl p-6 md:p-10 cozy-shadow-lg max-w-5xl mx-auto">
+
+                    <!-- ============ TAB 1: SIKLUS 1 ============ -->
+                    <div id="tab-modul" class="artifact-content-panel space-y-8">
+                        <div class="flex flex-col lg:flex-row gap-6 items-start justify-between border-b border-neutralDark/10 pb-6">
+                            <div>
+                                <h3 class="font-display font-bold text-2xl text-neutralDark mt-2">Modul Ajar Siklus 1</h3>
+                                <p class="text-xs text-neutralDark/50 mt-1 font-semibold">Diterapkan di kelas X SMA Negeri 1 Depok Sleman</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-display font-bold text-sm text-brandRed border-l-2 border-brandRed pl-3 uppercase tracking-wide mb-3 flex items-center gap-2">
+                                    <i class="fa-solid fa-file-pdf"></i> Pratinjau Modul
+                                </h4>
+                                <div class="gdrive-preview-container" id="preview-modul-siklus1">
+                                    <div class="preview-placeholder">
+                                        <i class="fa-solid fa-file-pdf"></i>
+                                        <p class="font-display font-bold text-sm">Pratinjau Modul Siklus 1</p>
+                                        <p class="text-xs text-neutralDark/50 mt-1">Masukkan ID Google Drive pada konfigurasi</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold text-sm text-brandRed border-l-2 border-brandRed pl-3 uppercase tracking-wide mb-3 flex items-center gap-2">
+                                    <i class="fa-solid fa-photo-film"></i> Pratinjau Media
+                                </h4>
+                                <div class="gdrive-preview-container" id="preview-media-siklus1">
+                                    <div class="preview-placeholder">
+                                        <i class="fa-solid fa-image"></i>
+                                        <p class="font-display font-bold text-sm">Pratinjau Media Siklus 1</p>
+                                        <p class="text-xs text-neutralDark/50 mt-1">Masukkan ID Google Drive pada konfigurasi</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-brandCreamLight/50 border border-brandCream/30 p-6 rounded-2xl space-y-4">
+                            <h4 class="font-display font-bold text-base text-neutralDark tracking-wide">Analisis Refleksi Mendalam:</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                                <div class="p-4 bg-whiteWarm border border-brandCream/15 rounded-xl">
+                                    <p class="font-bold text-neutralDark flex items-center text-xs sm:text-sm"><i class="fa-solid fa-triangle-exclamation mr-2 text-brandRed"></i>Kendala Penyusunan:</p>
+                                    <p class="text-neutralDark/70 mt-1 font-medium leading-relaxed text-xs sm:text-sm">Dalam penyusunan perangkat pembelajaran materi VLOOKUP, saya mengalami beberapa kendala, terutama dalam merancang permasalahan yang kontekstual dan sesuai dengan karakteristik model Problem Based Learning (PBL). Saya perlu menyesuaikan kasus yang digunakan dengan situasi dunia kerja agar peserta didik dapat memahami manfaat penggunaan VLOOKUP dalam pengolahan data. Selain itu, saya juga menghadapi tantangan dalam menyusun LKPD, media pembelajaran, dan latihan yang mampu mengakomodasi perbedaan kemampuan peserta didik. Beberapa peserta didik diperkirakan masih mengalami kesulitan memahami sintaks dan argumen rumus VLOOKUP, sehingga diperlukan penyusunan latihan yang bertahap mulai dari tingkat sederhana hingga lebih kompleks.</p>
+                                </div>
+                                <div class="p-4 bg-whiteWarm border border-brandCream/15 rounded-xl">
+                                    <p class="font-bold text-neutralDark flex items-center text-xs sm:text-sm"><i class="fa-solid fa-scroll mr-2 text-brandRed"></i>Teori Pedagogis Teradopsi:</p>
+                                    <p class="text-neutralDark/70 mt-1 font-medium leading-relaxed text-xs sm:text-sm">Dalam penyusunan perangkat pembelajaran, saya mengadopsi model Problem Based Learning (PBL) yang menempatkan peserta didik sebagai pusat pembelajaran melalui penyelesaian masalah nyata. Model ini didukung oleh teori konstruktivisme yang menekankan bahwa pengetahuan dibangun melalui pengalaman dan aktivitas belajar peserta didik. Selain itu, saya juga menerapkan pendekatan Contextual Teaching and Learning (CTL) dengan mengaitkan materi VLOOKUP pada kebutuhan dunia kerja, khususnya dalam pengolahan data administrasi dan penggajian karyawan. Melalui pendekatan tersebut, peserta didik diharapkan dapat memahami konsep sekaligus melihat manfaat nyata dari materi yang dipelajari.</p>
+                                </div>
+                                <div class="p-4 bg-whiteWarm border border-brandCream/15 rounded-xl">
+                                    <p class="font-bold text-neutralDark flex items-center text-xs sm:text-sm"><i class="fa-solid fa-circle-check mr-2 text-brandRed"></i>Faktor Keberhasilan:</p>
+                                    <p class="text-neutralDark/70 mt-1 font-medium leading-relaxed text-xs sm:text-sm">Keberhasilan penerapan perangkat pembelajaran didukung oleh penggunaan permasalahan yang relevan dengan dunia kerja sehingga mampu meningkatkan motivasi belajar peserta didik. Selain itu, penerapan model Problem Based Learning mendorong peserta didik untuk berpikir kritis dan aktif mencari solusi terhadap masalah yang diberikan. Penggunaan Microsoft Excel sebagai media praktik langsung juga membantu peserta didik memahami konsep VLOOKUP secara lebih konkret. Didukung dengan media presentasi yang sistematis, suasana kelas yang kondusif, serta partisipasi aktif peserta didik selama proses pembelajaran, tujuan pembelajaran dapat tercapai dengan baik dan peserta didik menunjukkan pemahaman dasar terhadap penggunaan fungsi VLOOKUP.</p>
+                                </div>
+                                <div class="p-4 bg-whiteWarm border border-brandCream/15 rounded-xl">
+                                    <p class="font-bold text-neutralDark flex items-center text-xs sm:text-sm"><i class="fa-solid fa-shuffle mr-2 text-brandRed"></i>Modifikasi untuk Kelas Berbeda:</p>
+                                    <p class="text-neutralDark/70 mt-1 font-medium leading-relaxed text-xs sm:text-sm">Apabila perangkat pembelajaran ini diterapkan pada kelas yang berbeda, beberapa komponen dapat disesuaikan dengan karakteristik peserta didik dan kondisi kelas. Permasalahan yang digunakan dalam pembelajaran dapat dimodifikasi tingkat kesulitannya sesuai kemampuan peserta didik, sedangkan media pembelajaran dapat dikembangkan dengan menambahkan video, simulasi interaktif, atau kuis digital untuk meningkatkan keterlibatan belajar. Selain itu, strategi pengelompokan peserta didik dapat disesuaikan agar mendukung kolaborasi yang lebih efektif, sementara LKPD dan latihan praktik dapat diperbanyak serta disusun secara bertahap untuk membantu peserta didik memahami materi secara lebih mendalam. Perubahan tersebut dilakukan agar pembelajaran tetap relevan, fleksibel, dan mampu memenuhi kebutuhan belajar peserta didik yang beragam.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ TAB 2: SIKLUS 2 ============ -->
+                    <div id="tab-media" class="artifact-content-panel hidden space-y-8">
+                        <div class="flex flex-col lg:flex-row gap-6 items-start justify-between border-b border-neutralDark/10 pb-6">
+                            <div>
+                                <h3 class="font-display font-bold text-2xl text-neutralDark mt-2">Modul Ajar Siklus 2</h3>
+                                <p class="text-xs text-neutralDark/50 mt-1 font-semibold">Diterapkan di kelas X SMA Negeri 1 Depok Sleman</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-display font-bold text-sm text-brandRed border-l-2 border-brandRed pl-3 uppercase tracking-wide mb-3 flex items-center gap-2">
+                                    <i class="fa-solid fa-file-pdf"></i> Pratinjau Modul
+                                </h4>
+                                <div class="gdrive-preview-container" id="preview-modul-siklus2">
+                                    <div class="preview-placeholder">
+                                        <i class="fa-solid fa-file-pdf"></i>
+                                        <p class="font-display font-bold text-sm">Pratinjau Modul Siklus 2</p>
+                                        <p class="text-xs text-neutralDark/50 mt-1">Masukkan ID Google Drive pada konfigurasi</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold text-sm text-brandRed border-l-2 border-brandRed pl-3 uppercase tracking-wide mb-3 flex items-center gap-2">
+                                    <i class="fa-solid fa-photo-film"></i> Pratinjau Media
+                                </h4>
+                                <div class="gdrive-preview-container" id="preview-media-siklus2">
+                                    <div class="preview-placeholder">
+                                        <i class="fa-solid fa-image"></i>
+                                        <p class="font-display font-bold text-sm">Pratinjau Media Siklus 2</p>
+                                        <p class="text-xs text-neutralDark/50 mt-1">Masukkan ID Google Drive pada konfigurasi</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-brandCreamLight/50 border border-brandCream/30 p-6 rounded-2xl space-y-4">
+                            <h4 class="font-display font-bold text-base text-neutralDark tracking-wide">Analisis Refleksi Mendalam:</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                                <div class="p-4 bg-whiteWarm border border-brandCream/15 rounded-xl">
+                                    <p class="font-bold text-neutralDark flex items-center text-xs sm:text-sm"><i class="fa-solid fa-triangle-exclamation mr-2 text-brandRed"></i>Kendala Penyusunan:</p>
+                                    <p class="text-neutralDark/70 mt-1 font-medium leading-relaxed text-xs sm:text-sm">Dalam proses penyusunan perangkat pembelajaran materi Pivot Table, saya mengalami kendala dalam merancang permasalahan yang sesuai dengan karakteristik model Problem Based Learning (PBL) dan relevan dengan kebutuhan dunia kerja. Saya perlu menyusun aktivitas pembelajaran, LKPD, dan media presentasi yang mampu membantu peserta didik memahami konsep analisis data secara bertahap melalui praktik langsung. Selain itu, saya juga harus mempertimbangkan perbedaan kemampuan peserta didik dalam menggunakan Microsoft Excel sehingga diperlukan penyusunan langkah-langkah praktik yang sistematis agar seluruh peserta didik dapat mengikuti pembelajaran dengan baik.</p>
+                                </div>
+                                <div class="p-4 bg-whiteWarm border border-brandCream/15 rounded-xl">
+                                    <p class="font-bold text-neutralDark flex items-center text-xs sm:text-sm"><i class="fa-solid fa-scroll mr-2 text-brandRed"></i>Teori Pedagogis Teradopsi:</p>
+                                    <p class="text-neutralDark/70 mt-1 font-medium leading-relaxed text-xs sm:text-sm">Dalam penyusunan perangkat pembelajaran, saya mengadopsi model Problem Based Learning (PBL) yang menempatkan peserta didik sebagai pusat pembelajaran melalui kegiatan pemecahan masalah yang berkaitan dengan pengolahan dan analisis data. Model ini didukung oleh teori konstruktivisme yang menekankan bahwa pengetahuan dibangun melalui pengalaman belajar dan praktik langsung. Selain itu, saya juga menerapkan pendekatan Contextual Teaching and Learning (CTL) dengan mengaitkan materi Pivot Table dengan situasi dunia kerja, khususnya dalam penyajian dan analisis data dalam jumlah besar, sehingga peserta didik dapat memahami manfaat dan penerapan materi dalam kehidupan nyata.</p>
+                                </div>
+                                <div class="p-4 bg-whiteWarm border border-brandCream/15 rounded-xl">
+                                    <p class="font-bold text-neutralDark flex items-center text-xs sm:text-sm"><i class="fa-solid fa-circle-check mr-2 text-brandRed"></i>Faktor Keberhasilan:</p>
+                                    <p class="text-neutralDark/70 mt-1 font-medium leading-relaxed text-xs sm:text-sm">Keberhasilan penerapan perangkat pembelajaran didukung oleh penggunaan model Problem Based Learning yang mampu mendorong peserta didik untuk aktif mencari solusi terhadap permasalahan yang diberikan. Penggunaan media pembelajaran berupa Microsoft Excel dan slide presentasi membantu peserta didik memahami konsep Pivot Table sebelum melakukan praktik secara langsung. Selain itu, keterkaitan materi dengan dunia kerja, suasana kelas yang kondusif, serta tingginya partisipasi peserta didik selama kegiatan praktik menjadi faktor penting yang mendukung tercapainya tujuan pembelajaran. Hal ini terlihat dari sebagian besar peserta didik yang mampu mengikuti langkah-langkah praktik secara mandiri dan menyelesaikan tugas yang diberikan dengan baik.</p>
+                                </div>
+                                <div class="p-4 bg-whiteWarm border border-brandCream/15 rounded-xl">
+                                    <p class="font-bold text-neutralDark flex items-center text-xs sm:text-sm"><i class="fa-solid fa-shuffle mr-2 text-brandRed"></i>Modifikasi untuk Kelas Berbeda:</p>
+                                    <p class="text-neutralDark/70 mt-1 font-medium leading-relaxed text-xs sm:text-sm">Apabila perangkat pembelajaran ini diterapkan pada kelas yang berbeda, saya akan menyesuaikan tingkat kompleksitas masalah, contoh kasus, dan aktivitas pembelajaran sesuai dengan kemampuan peserta didik. Pada kelas dengan kemampuan yang lebih beragam, saya akan menambahkan panduan praktik yang lebih rinci, memperbanyak contoh kasus yang dekat dengan dunia kerja, serta menyediakan aktivitas kolaboratif agar peserta didik dapat saling membantu dalam menyelesaikan tugas. Selain itu, media pembelajaran dapat dikembangkan menjadi lebih interaktif melalui penggunaan video tutorial, kuis digital, atau simulasi sehingga peserta didik yang kurang fokus saat penjelasan tetap dapat mengikuti proses pembelajaran secara mandiri dan mencapai tujuan pembelajaran secara optimal.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ TAB 3: SIKLUS 3 (dengan tambahan pratinjau LKPD & tombol unduh) ============ -->
+                    <div id="tab-kerja" class="artifact-content-panel hidden space-y-8">
+                        <div class="flex flex-col lg:flex-row gap-6 items-start justify-between border-b border-neutralDark/10 pb-6">
+                            <div>
+                                <h3 class="font-display font-bold text-2xl text-neutralDark mt-2">Modul Ajar Siklus 3</h3>
+                                <p class="text-xs text-neutralDark/50 mt-1 font-semibold">Diterapkan di kelas X SMA Negeri 1 Depok Sleman</p>
+                            </div>
+                        </div>
+
+                        <!-- PRATINJAU MODUL & MEDIA SIKLUS 3 -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-display font-bold text-sm text-brandRed border-l-2 border-brandRed pl-3 uppercase tracking-wide mb-3 flex items-center gap-2">
+                                    <i class="fa-solid fa-file-pdf"></i> Pratinjau Modul
+                                </h4>
+                                <div class="gdrive-preview-container" id="preview-modul-siklus3">
+                                    <div class="preview-placeholder">
+                                        <i class="fa-solid fa-file-pdf"></i>
+                                        <p class="font-display font-bold text-sm">Pratinjau Modul Siklus 3</p>
+                                        <p class="text-xs text-neutralDark/50 mt-1">Masukkan ID Google Drive pada konfigurasi</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold text-sm text-brandRed border-l-2 border-brandRed pl-3 uppercase tracking-wide mb-3 flex items-center gap-2">
+                                    <i class="fa-solid fa-photo-film"></i> Pratinjau Media
+                                </h4>
+                                <div class="gdrive-preview-container" id="preview-media-siklus3">
+                                    <div class="preview-placeholder">
+                                        <i class="fa-solid fa-image"></i>
+                                        <p class="font-display font-bold text-sm">Pratinjau Media Siklus 3</p>
+                                        <p class="text-xs text-neutralDark/50 mt-1">Masukkan ID Google Drive pada konfigurasi</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAMBAHAN: PRATINJAU LKPD & TOMBOL UNDUH -->
+                        <div class="mt-6">
+                            <h4 class="font-display font-bold text-sm text-brandRed border-l-2 border-brandRed pl-3 uppercase tracking-wide mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-file-lines"></i> Pratinjau Hasil LKPD siswa
+                            </h4>
+                            <div class="gdrive-preview-container" id="preview-lkpd-siklus3">
+                                <div class="preview-placeholder">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                    <p class="font-display font-bold text-sm">Pratinjau LKPD Siklus 3</p>
+                                    <p class="text-xs text-neutralDark/50 mt-1">Masukkan ID Google Drive pada konfigurasi</p>
+                                </div>
+                            </div>
+                            <div class="mt-3 text-center">
+                                <a id="btn-download-lkpd" href="#" class="inline-block px-6 py-2 bg-brandRed text-brandCream rounded-xl font-bold text-xs hover:bg-brandRedDark transition-all shadow-sm" target="_blank" style="display:none;">
+                                    <i class="fa-solid fa-download mr-2"></i> Unduh LKPD
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="bg-brandCreamLight/50 border border-brandCream/30 p-6 rounded-2xl space-y-4">
+                            <h4 class="font-display font-bold text-base text-neutralDark tracking-wide">Analisis Refleksi Mendalam:</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                                <div class="p-4 bg-whiteWarm border border-brandCream/15 rounded-xl">
+                                    <p class="font-bold text-neutralDark flex items-center text-xs sm:text-sm"><i class="fa-solid fa-triangle-exclamation mr-2 text-brandRed"></i>Kendala Penyusunan:</p>
+                                    <p class="text-neutralDark/70 mt-1 font-medium leading-relaxed text-xs sm:text-sm">Dalam penyusunan perangkat pembelajaran materi Scratch, saya mengalami beberapa kendala, terutama dalam merancang proyek yang sesuai dengan kemampuan peserta didik yang sebagian besar belum pernah menggunakan Scratch sebelumnya. Saya perlu menyusun modul ajar, LKPD, media presentasi, serta langkah-langkah proyek yang sistematis agar peserta didik dapat memahami konsep algoritma dan pemrograman secara bertahap. Selain itu, saya juga harus menyesuaikan alokasi waktu pembelajaran dengan aktivitas Project Based Learning (PjBL) yang cukup banyak, mulai dari pengenalan antarmuka Scratch, perencanaan proyek, pembuatan animasi, debugging, hingga presentasi hasil proyek. Tantangan lainnya adalah memastikan setiap kelompok memiliki kesempatan untuk berkolaborasi dan menyelesaikan proyek sesuai tujuan pembelajaran yang telah ditetapkan.</p>
+                                </div>
+                                <div class="p-4 bg-whiteWarm border border-brandCream/15 rounded-xl">
+                                    <p class="font-bold text-neutralDark flex items-center text-xs sm:text-sm"><i class="fa-solid fa-scroll mr-2 text-brandRed"></i>Teori Pedagogis Teradopsi:</p>
+                                    <p class="text-neutralDark/70 mt-1 font-medium leading-relaxed text-xs sm:text-sm">Dalam penyusunan perangkat pembelajaran ini, saya mengadopsi model Project Based Learning (PjBL) yang berpusat pada peserta didik melalui kegiatan proyek pembuatan animasi sederhana menggunakan Scratch. Model ini didukung oleh teori konstruktivisme yang menekankan bahwa pengetahuan dibangun melalui pengalaman langsung, eksplorasi, dan pemecahan masalah. Selain itu, saya juga menerapkan pendekatan Deep Learning dengan prinsip mindful, meaningful, dan joyful agar peserta didik tidak hanya memahami konsep pemrograman, tetapi juga mampu menghubungkannya dengan kehidupan sehari-hari dan perkembangan teknologi yang mereka gunakan. Melalui kegiatan proyek, diskusi kelompok, praktik, debugging, dan presentasi, peserta didik diberi kesempatan untuk mengembangkan kreativitas, berpikir kritis, berkolaborasi, serta menghasilkan karya yang bermakna.</p>
+                                </div>
+                                <div class="p-4 bg-whiteWarm border border-brandCream/15 rounded-xl">
+                                    <p class="font-bold text-neutralDark flex items-center text-xs sm:text-sm"><i class="fa-solid fa-circle-check mr-2 text-brandRed"></i>Faktor Keberhasilan:</p>
+                                    <p class="text-neutralDark/70 mt-1 font-medium leading-relaxed text-xs sm:text-sm">Keberhasilan penerapan perangkat pembelajaran didukung oleh penggunaan Scratch sebagai media pembelajaran yang menarik dan mudah dipahami oleh peserta didik karena bersifat visual dan interaktif. Selain itu, penerapan model Project Based Learning membuat peserta didik terlibat aktif dalam proses pembelajaran melalui kegiatan merancang, membuat, dan menguji proyek animasi sederhana secara berkelompok. Penggunaan media yang beragam seperti PPT, website Scratch, LKPD, dan Wayground juga membantu meningkatkan keterlibatan peserta didik selama pembelajaran. Keberhasilan tersebut terlihat dari tingginya antusiasme peserta didik saat membuat animasi, meningkatnya kreativitas dan kolaborasi dalam kelompok, serta tingkat keaktifan peserta didik yang mencapai lebih dari 80% selama proses pembelajaran berlangsung.</p>
+                                </div>
+                                <div class="p-4 bg-whiteWarm border border-brandCream/15 rounded-xl">
+                                    <p class="font-bold text-neutralDark flex items-center text-xs sm:text-sm"><i class="fa-solid fa-shuffle mr-2 text-brandRed"></i>Modifikasi untuk Kelas Berbeda:</p>
+                                    <p class="text-neutralDark/70 mt-1 font-medium leading-relaxed text-xs sm:text-sm">Apabila perangkat pembelajaran ini diterapkan pada kelas yang berbeda, saya akan melakukan beberapa penyesuaian sesuai karakteristik peserta didik dan kondisi kelas. Pada kelas dengan kemampuan awal yang lebih rendah, saya akan menambahkan contoh proyek yang lebih sederhana, memperjelas petunjuk pada LKPD, dan menyediakan pendampingan yang lebih intensif selama praktik. Sebaliknya, pada kelas yang memiliki kemampuan lebih tinggi, saya dapat memberikan proyek yang lebih kompleks seperti pembuatan game sederhana atau animasi interaktif dengan fitur tambahan. Selain itu, saya juga akan melakukan penyesuaian alokasi waktu pada setiap tahapan proyek agar seluruh kegiatan, termasuk presentasi hasil proyek, dapat terlaksana secara optimal. Saya juga berencana menambahkan variasi aktivitas yang lebih mendorong kreativitas, komunikasi, dan kolaborasi peserta didik sehingga pembelajaran menjadi lebih efektif dan sesuai dengan kebutuhan setiap kelas.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ TAB 4: DOKUMENTASI (10 foto) ============ -->
+                    <div id="tab-video" class="artifact-content-panel hidden space-y-8">
+                        <div class="flex flex-col lg:flex-row gap-6 items-start justify-between border-b border-neutralDark/10 pb-6">
+                            <div>
+                                <span class="px-2.5 py-1 bg-brandCreamLight text-brandRed text-[10px] font-bold rounded border border-brandCream/45 uppercase tracking-wide">DOKUMENTASI PRAKTIK</span>
+                                <h3 class="font-display font-bold text-2xl text-neutralDark mt-2">Galeri Foto & Video Dokumentasi Mengajar Terbimbing</h3>
+                                <p class="text-xs text-neutralDark/50 mt-1 font-semibold">Dokumentasi di kelas X SMAN 1 Depok, Sleman, Yogyakarta — Siklus 1, 2, & 3</p>
+                            </div>
+                        </div>
+
+                        <!-- GALERI FOTO DOKUMENTASI (10 FOTO) -->
+                        <div>
+                            <h4 class="font-display font-bold text-base text-brandRed border-l-2 border-brandRed pl-3 uppercase tracking-wide mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-camera-retro"></i> Galeri Foto Dokumentasi
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4" id="galeri-foto-container">
+                                <!-- 10 foto placeholder -->
+                                <div class="foto-galeri-item" id="foto-item-0">
+                                    <div class="preview-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9b2226;text-align:center;padding:1rem;">
+                                        <i class="fa-solid fa-image text-3xl mb-2" style="opacity:0.5;"></i>
+                                        <p class="font-display font-bold text-xs">Foto Dokumentasi 1</p>
+                                        <p class="text-[10px] text-neutralDark/50 mt-1">ID Google Drive belum diatur</p>
+                                    </div>
+                                    <div class="foto-overlay">
+                                        <span class="text-white font-display font-bold text-xs">Foto Dokumentasi 1</span>
+                                    </div>
+                                </div>
+                                <div class="foto-galeri-item" id="foto-item-1">
+                                    <div class="preview-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9b2226;text-align:center;padding:1rem;">
+                                        <i class="fa-solid fa-image text-3xl mb-2" style="opacity:0.5;"></i>
+                                        <p class="font-display font-bold text-xs">Foto Dokumentasi 2</p>
+                                        <p class="text-[10px] text-neutralDark/50 mt-1">ID Google Drive belum diatur</p>
+                                    </div>
+                                    <div class="foto-overlay">
+                                        <span class="text-white font-display font-bold text-xs">Foto Dokumentasi 2</span>
+                                    </div>
+                                </div>
+                                <div class="foto-galeri-item" id="foto-item-2">
+                                    <div class="preview-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9b2226;text-align:center;padding:1rem;">
+                                        <i class="fa-solid fa-image text-3xl mb-2" style="opacity:0.5;"></i>
+                                        <p class="font-display font-bold text-xs">Foto Dokumentasi 3</p>
+                                        <p class="text-[10px] text-neutralDark/50 mt-1">ID Google Drive belum diatur</p>
+                                    </div>
+                                    <div class="foto-overlay">
+                                        <span class="text-white font-display font-bold text-xs">Foto Dokumentasi 3</span>
+                                    </div>
+                                </div>
+                                <div class="foto-galeri-item" id="foto-item-3">
+                                    <div class="preview-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9b2226;text-align:center;padding:1rem;">
+                                        <i class="fa-solid fa-image text-3xl mb-2" style="opacity:0.5;"></i>
+                                        <p class="font-display font-bold text-xs">Foto Dokumentasi 4</p>
+                                        <p class="text-[10px] text-neutralDark/50 mt-1">ID Google Drive belum diatur</p>
+                                    </div>
+                                    <div class="foto-overlay">
+                                        <span class="text-white font-display font-bold text-xs">Foto Dokumentasi 4</span>
+                                    </div>
+                                </div>
+                                <div class="foto-galeri-item" id="foto-item-4">
+                                    <div class="preview-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9b2226;text-align:center;padding:1rem;">
+                                        <i class="fa-solid fa-image text-3xl mb-2" style="opacity:0.5;"></i>
+                                        <p class="font-display font-bold text-xs">Foto Dokumentasi 5</p>
+                                        <p class="text-[10px] text-neutralDark/50 mt-1">ID Google Drive belum diatur</p>
+                                    </div>
+                                    <div class="foto-overlay">
+                                        <span class="text-white font-display font-bold text-xs">Foto Dokumentasi 5</span>
+                                    </div>
+                                </div>
+                                <div class="foto-galeri-item" id="foto-item-5">
+                                    <div class="preview-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9b2226;text-align:center;padding:1rem;">
+                                        <i class="fa-solid fa-image text-3xl mb-2" style="opacity:0.5;"></i>
+                                        <p class="font-display font-bold text-xs">Foto Dokumentasi 6</p>
+                                        <p class="text-[10px] text-neutralDark/50 mt-1">ID Google Drive belum diatur</p>
+                                    </div>
+                                    <div class="foto-overlay">
+                                        <span class="text-white font-display font-bold text-xs">Foto Dokumentasi 6</span>
+                                    </div>
+                                </div>
+                                <div class="foto-galeri-item" id="foto-item-6">
+                                    <div class="preview-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9b2226;text-align:center;padding:1rem;">
+                                        <i class="fa-solid fa-image text-3xl mb-2" style="opacity:0.5;"></i>
+                                        <p class="font-display font-bold text-xs">Foto Dokumentasi 7</p>
+                                        <p class="text-[10px] text-neutralDark/50 mt-1">ID Google Drive belum diatur</p>
+                                    </div>
+                                    <div class="foto-overlay">
+                                        <span class="text-white font-display font-bold text-xs">Foto Dokumentasi 7</span>
+                                    </div>
+                                </div>
+                                <div class="foto-galeri-item" id="foto-item-7">
+                                    <div class="preview-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9b2226;text-align:center;padding:1rem;">
+                                        <i class="fa-solid fa-image text-3xl mb-2" style="opacity:0.5;"></i>
+                                        <p class="font-display font-bold text-xs">Foto Dokumentasi 8</p>
+                                        <p class="text-[10px] text-neutralDark/50 mt-1">ID Google Drive belum diatur</p>
+                                    </div>
+                                    <div class="foto-overlay">
+                                        <span class="text-white font-display font-bold text-xs">Foto Dokumentasi 8</span>
+                                    </div>
+                                </div>
+                                <div class="foto-galeri-item" id="foto-item-8">
+                                    <div class="preview-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9b2226;text-align:center;padding:1rem;">
+                                        <i class="fa-solid fa-image text-3xl mb-2" style="opacity:0.5;"></i>
+                                        <p class="font-display font-bold text-xs">Foto Dokumentasi 9</p>
+                                        <p class="text-[10px] text-neutralDark/50 mt-1">ID Google Drive belum diatur</p>
+                                    </div>
+                                    <div class="foto-overlay">
+                                        <span class="text-white font-display font-bold text-xs">Foto Dokumentasi 9</span>
+                                    </div>
+                                </div>
+                                <div class="foto-galeri-item" id="foto-item-9">
+                                    <div class="preview-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9b2226;text-align:center;padding:1rem;">
+                                        <i class="fa-solid fa-image text-3xl mb-2" style="opacity:0.5;"></i>
+                                        <p class="font-display font-bold text-xs">Foto Dokumentasi 10</p>
+                                        <p class="text-[10px] text-neutralDark/50 mt-1">ID Google Drive belum diatur</p>
+                                    </div>
+                                    <div class="foto-overlay">
+                                        <span class="text-white font-display font-bold text-xs">Foto Dokumentasi 10</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-[10px] text-neutralDark/40 mt-2 italic text-center">Klik foto untuk melihat ukuran penuh. Atur ID Google Drive di bagian konfigurasi <code class="bg-brandCreamLight px-1.5 py-0.5 rounded text-brandRed font-mono">GOOGLE_DRIVE_IDS.dokumentasi.foto</code></p>
+                        </div>
+
+                        <!-- VIDEO DOKUMENTASI -->
+                        <div>
+                            <h4 class="font-display font-bold text-base text-brandRed border-l-2 border-brandRed pl-3 uppercase tracking-wide mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-video"></i> Video Dokumentasi Praktik Mengajar
+                            </h4>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="video-dok-container">
+                                <div>
+                                    <p class="text-xs font-bold text-neutralDark mb-2 flex items-center gap-2">
+                                        <span class="w-5 h-5 rounded-full bg-brandRed text-brandCream flex items-center justify-center text-[9px] font-bold">1</span>
+                                        Cuplikan Video mengajar
+                                    </p>
+                                    <div class="video-embed-container aspect-ratio-16-9" id="video-embed-0">
+                                        <div class="preview-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#e9d8a6;text-align:center;padding:1rem;background:#1a1a1a;">
+                                            <i class="fa-solid fa-video text-3xl mb-2" style="opacity:0.5;"></i>
+                                            <p class="font-display font-bold text-xs">Video Dokumentasi 1</p>
+                                            <p class="text-[10px] text-white/40 mt-1">ID Google Drive belum diatur</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-neutralDark mb-2 flex items-center gap-2">
+                                        <span class="w-5 h-5 rounded-full bg-brandRed text-brandCream flex items-center justify-center text-[9px] font-bold">2</span>
+                                        Cuplikan Video mengajar
+                                    </p>
+                                    <div class="video-embed-container aspect-ratio-16-9" id="video-embed-1">
+                                        <div class="preview-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#e9d8a6;text-align:center;padding:1rem;background:#1a1a1a;">
+                                            <i class="fa-solid fa-video text-3xl mb-2" style="opacity:0.5;"></i>
+                                            <p class="font-display font-bold text-xs">Video Dokumentasi 2</p>
+                                            <p class="text-[10px] text-white/40 mt-1">ID Google Drive belum diatur</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- ==================== END ARTEFAK & ANALISIS ==================== -->
+
+        <!-- MENU VIEW: HASIL PENILAIAN -->
+        <section id="view-penilaian" class="page-view hidden-view py-16 lg:py-24 bg-whiteWarm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center mb-16">
+                    <span class="px-4 py-1.5 bg-brandRedLight text-brandRed text-xs font-bold tracking-wider uppercase rounded-full">EVALUASI RESMI</span>
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-neutralDark mt-4">
+                        Penilaian Guru Pamong & DPL (Lampiran 7 & 8)
+                    </h2>
+                    <div class="w-16 h-1 bg-brandRed mx-auto mt-4 rounded-full"></div>
+                    <p class="text-neutralDark/80 mt-4 leading-relaxed text-sm sm:text-base font-medium">
+                        Rekapitulasi resmi performa rancangan perangkat pembelajaran (Lampiran 7) dan praktik mengajar nyata (Lampiran 8) yang telah diawasi oleh Guru Pamong serta Dosen Pembimbing Lapangan.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    <div class="lg:col-span-8 space-y-6">
+                        <div class="p-6 bg-white border border-brandCream/20 rounded-2xl cozy-shadow">
+                            <div class="flex items-center justify-between mb-6 pb-4 border-b border-neutralDark/15">
+                                <div class="flex items-center space-x-3">
+                                    <div class="p-2.5 bg-brandRed text-brandCream rounded-xl">
+                                        <i class="fa-solid fa-file-pdf text-base"></i>
+                                    </div>
+                                    <h3 class="font-display font-bold text-base sm:text-lg text-neutralDark">Dokumen Lampiran 7 & 8</h3>
+                                </div>
+                                <span class="px-2.5 py-1 bg-brandCreamLight text-brandRed text-[10px] font-bold uppercase rounded-full">PDF Viewer</span>
+                            </div>
+                            <div class="mb-6">
+                                <p class="text-sm font-bold text-neutralDark mb-3 flex items-center"><i class="fa-solid fa-chart-line text-brandRed mr-2"></i> Lampiran 7: Evaluasi Rancangan Perangkat</p>
+                                <div class="space-y-3">
+                                    <div><div class="flex justify-between text-xs font-bold uppercase mb-1.5"><span>Perangkat ajar siklus 1</span><span class="text-brandRed font-mono">80/100</span></div><div class="w-full h-2 bg-brandCream/20 rounded-full overflow-hidden"><div class="h-full bg-brandRed rounded-full" style="width: 84%"></div></div></div>
+                                    <div><div class="flex justify-between text-xs font-bold uppercase mb-1.5"><span>Perangkat ajar siklus 2</span><span class="text-brandRed font-mono">80/100</span></div><div class="w-full h-2 bg-brandCream/20 rounded-full overflow-hidden"><div class="h-full bg-brandRed rounded-full" style="width: 92%"></div></div></div>
+                                    <div><div class="flex justify-between text-xs font-bold uppercase mb-1.5"><span>Perangkat ajar siklus 3</span><span class="text-brandRed font-mono">83/100</span></div><div class="w-full h-2 bg-brandCream/20 rounded-full overflow-hidden"><div class="h-full bg-brandRed rounded-full" style="width: 96%"></div></div></div>
+                                </div>
+                            </div>
+                            <div class="mb-6 pt-4 border-t border-brandCream/20">
+                                <p class="text-sm font-bold text-neutralDark mb-3 flex items-center"><i class="fa-solid fa-chalkboard-user text-brandRed mr-2"></i> Lampiran 8: Evaluasi Praktik Mengajar Nyata</p>
+                                <div class="space-y-3">
+                                    <div><div class="flex justify-between text-xs font-bold uppercase mb-1.5"><span>Pelaksanaan pembelajaran siklus 1</span><span class="text-brandRed font-mono">81/100</span></div><div class="w-full h-2 bg-brandCream/20 rounded-full overflow-hidden"><div class="h-full bg-brandRed rounded-full" style="width: 82%"></div></div></div>
+                                    <div><div class="flex justify-between text-xs font-bold uppercase mb-1.5"><span>Pelaksanaan pembelajaran siklus 2</span><span class="text-brandRed font-mono">82/100</span></div><div class="w-full h-2 bg-brandCream/20 rounded-full overflow-hidden"><div class="h-full bg-brandRed rounded-full" style="width: 90%"></div></div></div>
+                                    <div><div class="flex justify-between text-xs font-bold uppercase mb-1.5"><span>Pelaksanaan pembelajaran siklus 3</span><span class="text-brandRed font-mono">85/100</span></div><div class="w-full h-2 bg-brandCream/20 rounded-full overflow-hidden"><div class="h-full bg-brandRed rounded-full" style="width: 95%"></div></div></div>
+                                </div>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-brandCream/20">
+    <p class="text-xs font-bold text-neutralDark mb-4 flex items-center"><i class="fa-solid fa-file-pdf text-brandRed mr-2"></i> Dokumen Lampiran 7 & 8 (3 Berkas)</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Pratinjau 1 -->
+        <div>
+            <p class="text-xs font-semibold text-neutralDark mb-2">📄 Lampiran 7 (Evaluasi Perangkat)</p>
+            <div class="gdrive-preview-container" id="preview-lampiran-1" style="min-height:280px;">
+                <div class="preview-placeholder"><i class="fa-solid fa-file-pdf"></i><p>Pratinjau Lampiran 1</p></div>
+            </div>
+        </div>
+        <!-- Pratinjau 2 -->
+        <div>
+            <p class="text-xs font-semibold text-neutralDark mb-2">📄 Lampiran 8 (Evaluasi Praktik)</p>
+            <div class="gdrive-preview-container" id="preview-lampiran-2" style="min-height:280px;">
+                <div class="preview-placeholder"><i class="fa-solid fa-file-pdf"></i><p>Pratinjau Lampiran 2</p></div>
+            </div>
+        </div>
+        <!-- Pratinjau 3 -->
+        <div>
+            <p class="text-xs font-semibold text-neutralDark mb-2">📄 Lampiran 7 & 8 (Gabungan)</p>
+            <div class="gdrive-preview-container" id="preview-lampiran-3" style="min-height:280px;">
+                <div class="preview-placeholder"><i class="fa-solid fa-file-pdf"></i><p>Pratinjau Lampiran 3</p></div>
+            </div>
+        </div>
+    </div>
+    <p class="text-[10px] text-neutralDark/40 mt-2 italic text-center">Masukkan ID Google Drive di konfigurasi <code class="bg-brandCreamLight px-1.5 py-0.5 rounded text-brandRed font-mono">GOOGLE_DRIVE_IDS.penilaian</code></p>
+</div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-4 space-y-6">
+                        <div class="bg-brandCreamLight border border-brandCream/35 p-6 rounded-2xl relative cozy-shadow">
+                            <div class="text-brandRed text-3xl mb-2"><i class="fa-solid fa-quote-left"></i></div>
+                            <h4 class="font-display font-bold text-base text-neutralDark mb-2">Catatan Guru Pamong:</h4>
+                            <p class="text-xs sm:text-sm text-neutralDark/80 italic leading-relaxed font-medium">"Pertahankan kreativitas dan semangat mengajar yang sudah baik. Tingkatkan pengelolaan waktu agar seluruh kegiatan pembelajaran dapat terlaksana secara optimal."</p>
+                            <div class="mt-4 pt-4 border-t border-neutralDark/10 text-[10px]"><p class="font-bold text-neutralDark">Guru Pamong Informatika</p><p class="text-neutralDark/50">SMAN 1 Depok, Sleman, Yogyakarta</p></div>
+                        </div>
+                        <div class="p-6 bg-brandRed text-white rounded-2xl text-center cozy-shadow-lg">
+                            <p class="font-display font-bold text-5xl text-brandCream">81,8</p>
+                            <p class="text-[10px] font-bold text-white uppercase tracking-wider mt-2 bg-brandRedDark/40 py-1 px-3 rounded-full inline-block">Nilai Rata-Rata Kumulatif</p>
+                            <p class="text-xs text-brandCream/80 mt-4 leading-relaxed font-medium">Representasi total perolehan penilaian perangkat dan performa praktik mengajar secara komprehensif.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENU VIEW: REFLEKSI AKHIR & RTL -->
+        <section id="view-refleksi" class="page-view hidden-view py-16 md:py-24 bg-neutralLight">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center mb-16">
+                    <span class="px-4 py-1.5 bg-brandRedLight text-brandRed text-xs font-bold tracking-wider uppercase rounded-full">PENGEMBANGAN DIRI</span>
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-neutralDark mt-4">Refleksi akhir Praktik Terbimbing</h2>
+                    <div class="w-16 h-1 bg-brandRed mx-auto mt-4 rounded-full"></div>
+                    <p class="text-neutralDark/80 mt-4 leading-relaxed text-sm sm:text-base font-medium">Memetakan misi strategis, kompetensi unggulan, pemetaan kekuatan pribadi, kelemahan diri yang harus diperbaiki, serta rancangan aksi tindak lanjut profesional.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <div class="bg-white border border-brandCream/15 rounded-2xl p-6 relative cozy-shadow"><div class="w-10 h-10 bg-brandRed text-brandCream rounded-xl flex items-center justify-center font-bold text-base mb-4"><i class="fa-solid fa-bullseye"></i></div><h3 class="font-display font-bold text-lg text-neutralDark mb-2">Apa yang telah mahasiswa pelajari sebagai peserta PPG calon guru selama tahapan PPL Terbimbing dari awal hingga akhir?</h3><p class="text-xs sm:text-sm text-neutralDark/70 leading-relaxed font-medium">Sebagai peserta PPG Calon Guru, saya mempelajari banyak hal selama pelaksanaan PPL Terbimbing dari awal hingga akhir. Saya belajar bagaimana merencanakan pembelajaran melalui penyusunan modul ajar, LKPD, media pembelajaran, dan instrumen asesmen yang sesuai dengan karakteristik peserta didik. Saya juga memperoleh pengalaman dalam menerapkan berbagai model pembelajaran seperti Problem Based Learning (PBL) dan Project Based Learning (PjBL), mengelola kelas, memanfaatkan teknologi sebagai media pembelajaran, serta melaksanakan asesmen dan refleksi pembelajaran. Melalui bimbingan Guru Pamong dan Dosen Pembimbing Lapangan, saya memahami pentingnya pembelajaran yang berpusat pada peserta didik, pengelolaan waktu yang efektif, serta pemberian pengalaman belajar yang bermakna dan menyenangkan. PPL Terbimbing juga membantu saya meningkatkan kompetensi pedagogik, profesional, sosial, dan kepribadian sehingga saya menjadi lebih percaya diri dan siap menjalankan tugas sebagai guru profesional di masa depan.</p></div>
+                    <div class="bg-white border border-brandCream/15 rounded-2xl p-6 relative cozy-shadow"><div class="w-10 h-10 bg-brandRed text-brandCream rounded-xl flex items-center justify-center font-bold text-base mb-4"><i class="fa-solid fa-puzzle-piece"></i></div><h3 class="font-display font-bold text-lg text-neutralDark mb-2">Apakah terdapat pengalaman yang menantang dan bagaimana solusi dari permasalahan tersebut?</h3><p class="text-xs sm:text-sm text-neutralDark/70 leading-relaxed font-medium">Ya, selama pelaksanaan PPL Terbimbing saya mengalami beberapa pengalaman yang menantang, terutama dalam mengelola waktu pembelajaran agar seluruh kegiatan yang telah direncanakan dalam modul ajar dapat terlaksana dengan baik. Pada beberapa pertemuan, peserta didik membutuhkan waktu lebih lama saat praktik sehingga kegiatan presentasi atau refleksi belum dapat dilaksanakan secara optimal. Selain itu, saya juga menghadapi tantangan dalam mengakomodasi perbedaan kemampuan peserta didik, terutama saat mempelajari materi yang membutuhkan keterampilan praktik seperti Microsoft Excel dan Scratch. Untuk mengatasi hal tersebut, saya melakukan perbaikan pada perencanaan pembelajaran, memperjelas petunjuk kegiatan, memberikan contoh yang lebih bertahap, serta meningkatkan pendampingan kepada peserta didik yang mengalami kesulitan. Pengalaman tersebut menjadi pembelajaran berharga bagi saya untuk terus meningkatkan kualitas pembelajaran dan kemampuan mengelola kelas secara lebih efektif.</p></div>
+                    <div class="bg-white border border-brandCream/15 rounded-2xl p-6 relative cozy-shadow"><div class="w-10 h-10 bg-brandRed text-brandCream rounded-xl flex items-center justify-center font-bold text-base mb-4"><i class="fa-solid fa-seedling"></i></div><h3 class="font-display font-bold text-lg text-neutralDark mb-2">Apakah umpan balik atau saran konstruktif yang diberikan kepada mahasiswa dalam diskusi refleksi akhir sebagai bentuk perbaikan untuk ke tahap PPL selanjutnya (PPL Mandiri)</h3><p class="text-xs sm:text-sm text-neutralDark/70 leading-relaxed font-medium">Dalam diskusi refleksi akhir, saya memperoleh umpan balik dan saran konstruktif untuk terus meningkatkan kualitas pembelajaran pada tahap PPL Mandiri. Saya disarankan untuk mempertahankan kemampuan dalam menyusun perangkat pembelajaran yang sistematis dan memanfaatkan media pembelajaran yang bervariasi. Selain itu, saya perlu meningkatkan pengelolaan waktu agar seluruh rangkaian kegiatan pembelajaran dapat terlaksana sesuai perencanaan, terutama pada tahap presentasi, refleksi, dan tindak lanjut. Saya juga disarankan untuk terus mengembangkan pembelajaran yang berpusat pada peserta didik, memberikan pendampingan yang lebih optimal kepada peserta didik yang mengalami kesulitan, serta memperkaya aktivitas pembelajaran yang mampu meningkatkan kreativitas, kolaborasi, dan keterampilan berpikir kritis peserta didik. Umpan balik tersebut menjadi bekal bagi saya untuk melaksanakan PPL Mandiri dengan lebih baik dan profesional.</p></div>
+                </div>
+                <div class="mt-8 p-6 bg-brandCreamLight border border-brandCream/35 rounded-2xl"><h4 class="font-display font-bold text-base text-neutralDark mb-3 flex items-center"><i class="fa-solid fa-road-barrier mr-3 text-brandRed"></i> Filosofi Mengajar </h4><ul class="list-disc pl-5 space-y-2.5 text-xs sm:text-sm text-neutralDark/80 font-sans font-medium leading-relaxed"><p>Bagi saya, menjadi guru bukan hanya tentang menyampaikan materi pelajaran, tetapi juga tentang berbagi ilmu, pengalaman, dan nilai-nilai kehidupan kepada peserta didik. Saya memilih profesi guru karena saya senang berinteraksi dengan peserta didik dan ingin membantu mereka berkembang sesuai potensi yang dimiliki. Saya meyakini bahwa setiap peserta didik memiliki kemampuan, karakter, dan kecepatan belajar yang berbeda sehingga mereka perlu diberikan kesempatan untuk belajar secara bertahap dalam lingkungan yang aman, nyaman, dan mendukung perkembangan mereka.</p><p>Dalam praktik pembelajaran, saya percaya bahwa peserta didik harus menjadi pusat dari proses belajar. Oleh karena itu, saya berusaha menerapkan pembelajaran yang memberikan ruang bagi peserta didik untuk aktif bertanya, berdiskusi, mencoba, dan menemukan pemahamannya sendiri. Pengalaman selama PPL Terbimbing semakin menguatkan keyakinan saya bahwa pembelajaran yang melibatkan peserta didik secara aktif melalui kegiatan praktik, pemecahan masalah, dan proyek mampu meningkatkan motivasi serta pemahaman mereka terhadap materi. Pandangan ini sejalan dengan teori konstruktivisme yang menyatakan bahwa pengetahuan dibangun melalui pengalaman dan keterlibatan aktif peserta didik dalam proses belajar.</p><p>Sebagai guru Informatika, saya memandang teknologi bukan hanya sebagai alat bantu pembelajaran, tetapi juga sebagai keterampilan masa depan yang perlu dikuasai oleh peserta didik. Melalui pembelajaran Informatika, saya ingin membantu peserta didik mengembangkan kemampuan berpikir logis, kreatif, kritis, dan kolaboratif yang akan bermanfaat dalam kehidupan maupun dunia kerja di masa mendatang. Oleh karena itu, saya berupaya menghadirkan pembelajaran yang kontekstual dan relevan dengan perkembangan teknologi sehingga peserta didik dapat melihat manfaat nyata dari apa yang mereka pelajari.</p><p>Selain kompetensi akademik, saya juga meyakini bahwa pembentukan karakter merupakan bagian penting dari pendidikan. Saya berharap peserta didik tidak hanya mampu memahami materi pelajaran, tetapi juga memiliki sikap disiplin, tanggung jawab, kerja sama, dan rasa hormat kepada orang lain. Karena itu, saya berusaha menjadi guru yang sabar, mampu mendengarkan, memberikan bimbingan, serta menjadi teladan yang baik bagi peserta didik dalam proses pembelajaran maupun kehidupan sehari-hari.</p><p>Pengalaman selama PPL Terbimbing juga mengajarkan saya bahwa perencanaan yang baik dan pengelolaan waktu yang efektif sangat menentukan keberhasilan pembelajaran. Refleksi yang saya lakukan selama proses tersebut mendorong saya untuk terus belajar, memperbaiki diri, dan mengembangkan kompetensi profesional sebagai pendidik. Saya percaya bahwa guru yang baik adalah guru yang sabar, mau terus belajar, dan senantiasa berupaya memberikan pengalaman belajar yang bermakna bagi setiap peserta didiknya.</p></ul></div>
+            </div>
+        </section>
+
+        <!-- MENU VIEW: PPL MANDIRI SEMESTER 2 -->
+        <section id="view-ppl-mandiri" class="page-view hidden-view py-16 lg:py-24 bg-neutralLight">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center mb-12">
+                    <span class="px-4 py-1.5 bg-brandRedLight text-brandRed text-xs font-bold tracking-wider uppercase rounded-full">SEMESTER 2</span>
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-neutralDark mt-4">Praktik Pengalaman Lapangan Mandiri</h2>
+                    <div class="w-16 h-1 bg-brandRed mx-auto mt-4 rounded-full"></div>
+                    <p class="text-neutralDark/80 mt-4 leading-relaxed text-sm sm:text-base font-medium">Dokumentasi perangkat pembelajaran Semester 2 disusun berdasarkan siklus, sedangkan kegiatan non-mengajar memiliki bagian tersendiri di luar konten siklus.</p>
+                </div>
+
+                <div class="max-w-5xl mx-auto mb-8 p-4 sm:p-5 bg-brandCreamLight border border-brandCream/35 rounded-2xl cozy-shadow-sm">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 flex-shrink-0 bg-brandRed text-brandCream rounded-xl flex items-center justify-center"><i class="fa-solid fa-circle-info"></i></div>
+                        <div>
+                            <p class="font-display font-bold text-sm text-neutralDark">Informasi tautan dokumen</p>
+                            <p class="text-xs sm:text-sm text-neutralDark/70 mt-1 leading-relaxed">Untuk mengganti dokumen, buka file HTML di VS Code lalu tekan <strong>Ctrl + F</strong> dan cari <code class="bg-brandCreamLight px-1.5 py-0.5 rounded text-brandRed">KONFIGURASI LINK PPL MANDIRI</code>. Ganti URL pada bagian siklus dan kategori yang sesuai. Kolom <strong>documentUrl</strong> untuk file utama, sedangkan <strong>analysisUrl</strong> untuk keterangan analisis. Pratinjau dan tombol unduh akan mengikuti link baru secara otomatis.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5" aria-label="Bagian PPL Mandiri">
+                    <button type="button" data-ppl-view="cycles" class="ppl-view-btn is-active" aria-pressed="true">
+                        <i class="fa-solid fa-layer-group"></i> Siklus Pembelajaran
+                    </button>
+                    <button type="button" data-ppl-view="nonmengajar" class="ppl-view-btn" aria-pressed="false">
+                        <i class="fa-solid fa-people-group"></i> Kegiatan Non Mengajar
+                    </button>
+                </div>
+
+                <div id="ppl-cycles-panel" class="max-w-5xl mx-auto bg-whiteWarm border border-brandCream/25 rounded-3xl p-5 sm:p-8 cozy-shadow-lg">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                        <div>
+                            <p class="text-[10px] font-bold tracking-widest uppercase text-brandRed">PORTOFOLIO PRAKTIK</p>
+                            <h3 class="font-display font-bold text-xl sm:text-2xl text-neutralDark mt-1">Semester 2 · Siklus Pembelajaran</h3>
+                        </div>
+                        <span class="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-brandCreamLight text-brandRed text-xs font-bold border border-brandCream/50"><i class="fa-solid fa-folder-open"></i> 4 Siklus</span>
+                    </div>
+
+                    <div id="ppl-cycle-tabs" class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-7" aria-label="Pilih siklus PPL Mandiri">
+                        <button type="button" data-ppl-cycle="siklus1" class="ppl-cycle-btn">Siklus 1</button>
+                        <button type="button" data-ppl-cycle="siklus2" class="ppl-cycle-btn">Siklus 2</button>
+                        <button type="button" data-ppl-cycle="siklus3" class="ppl-cycle-btn">Siklus 3 <span>(UTS)</span></button>
+                        <button type="button" data-ppl-cycle="siklus4" class="ppl-cycle-btn">Siklus 4 <span>(UAS)</span></button>
+                    </div>
+
+                    <div class="border-t border-brandCream/40 pt-6">
+                        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-widest text-neutralDark/45">Artefak yang ditampilkan</p>
+                                <h3 id="ppl-cycle-heading" class="font-display font-bold text-xl text-brandRed mt-1">Siklus 1</h3>
+                            </div>
+                            <p class="text-[11px] text-neutralDark/50">Pilih kategori untuk melihat dokumen dan dokumentasi.</p>
+                        </div>
+                        <div id="ppl-category-tabs" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 mb-6" aria-label="Kategori artefak setiap siklus PPL Mandiri">
+                            <button type="button" data-ppl-category="rpp" class="ppl-category-btn"><i class="fa-solid fa-file-lines"></i><span>Modul Ajar/RPP</span></button>
+                            <button type="button" data-ppl-category="media" class="ppl-category-btn"><i class="fa-solid fa-display"></i><span>Media Pembelajaran</span></button>
+                            <button type="button" data-ppl-category="lkpd" class="ppl-category-btn"><i class="fa-solid fa-clipboard-list"></i><span>LKPD</span></button>
+                            <button type="button" data-ppl-category="asesmen" class="ppl-category-btn"><i class="fa-solid fa-list-check"></i><span>Instrumen Asesmen</span></button>
+                        </div>
+                        <div id="ppl-mandiri-content" aria-live="polite"></div>
+                    </div>
+                </div>
+
+                <section id="ppl-nonmengajar-panel" class="hidden max-w-5xl mx-auto bg-whiteWarm border border-brandCream/25 rounded-3xl p-5 sm:p-8 cozy-shadow-lg" aria-labelledby="ppl-nonmengajar-heading">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-brandCream/40 pb-5">
+                        <div>
+                            <p class="text-[10px] font-bold tracking-widest uppercase text-brandRed">DOKUMENTASI TERPISAH</p>
+                            <h3 id="ppl-nonmengajar-heading" class="font-display font-bold text-xl sm:text-2xl text-neutralDark mt-1">Kegiatan Non Mengajar</h3>
+                            <p class="text-xs sm:text-sm text-neutralDark/65 mt-2 leading-relaxed">Bagian ini berdiri sendiri dan tidak terikat pada Siklus 1, 2, 3 (UTS), maupun Siklus 4 (UAS).</p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-brandCreamLight text-brandRed text-xs font-bold border border-brandCream/50"><i class="fa-solid fa-folder-open"></i> Dokumentasi PPL</span>
+                    </div>
+                    <div class="mt-6 p-6 sm:p-8 rounded-2xl border border-dashed border-brandCream/70 bg-brandCreamLight/50 text-center">
+                        <div class="w-14 h-14 mx-auto rounded-2xl bg-whiteWarm text-brandRed flex items-center justify-center text-2xl shadow-sm"><i class="fa-solid fa-people-group"></i></div>
+                        <h4 class="font-display font-bold text-lg text-neutralDark mt-4">Dokumentasi Kegiatan Non Mengajar</h4>
+                        <p class="text-xs sm:text-sm text-neutralDark/65 max-w-2xl mx-auto mt-2 leading-relaxed">Area ini disediakan khusus untuk menampilkan dokumentasi kegiatan non-mengajar, seperti foto, video, atau dokumen pendukung. Tautan dokumentasi belum disertakan, sehingga pratinjau dan tombol unduh akan ditampilkan setelah tautannya ditambahkan.</p>
+                        <span class="inline-flex items-center gap-2 mt-4 px-3 py-1.5 rounded-full bg-whiteWarm border border-brandCream/50 text-[10px] font-bold text-neutralDark/55"><i class="fa-solid fa-hourglass-half"></i> Menunggu tautan dokumentasi</span>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- MENU VIEW: KONTAK -->
+        <section id="view-kontak" class="page-view hidden-view py-16 lg:py-24 bg-whiteWarm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-5 space-y-6">
+                        <span class="inline-block px-4 py-1.5 bg-brandCream text-neutralDark text-xs font-bold tracking-wider uppercase rounded-full">Hubungi Saya</span>
+                        <h2 class="font-display font-bold text-3xl sm:text-4xl text-neutralDark leading-tight">Mari Berdiskusi & Berkolaborasi Memajukan Pendidikan Indonesia!</h2>
+                        <p class="text-xs sm:text-sm text-neutralDark/70 leading-relaxed font-medium">Saya selalu terbuka untuk berdiskusi terkait metodologi pengajaran Informatika, inovasi kurikulum Merdeka, serta kolaborasi riset tindakan kelas. Silakan kirim pesan melalui kontak di bawah ini.</p>
+                        <div class="space-y-4 pt-4">
+                            <div class="flex items-center space-x-4 text-xs sm:text-sm bg-white p-4 rounded-2xl cozy-shadow border border-brandCream/15"><div class="w-10 h-10 bg-brandCreamLight text-brandRed flex items-center justify-center rounded-xl"><i class="fa-solid fa-envelope text-base"></i></div><div><p class="font-bold text-neutralDark">E-mail Profesional</p><p class="text-neutralDark/60 font-semibold mt-0.5">diasmaulana2025@student.uny.ac.id</p></div></div>
+                            <div class="flex items-center space-x-4 text-xs sm:text-sm bg-white p-4 rounded-2xl cozy-shadow border border-brandCream/15"><div class="w-10 h-10 bg-brandCreamLight text-brandRed flex items-center justify-center rounded-xl"><i class="fa-solid fa-school-flag text-base"></i></div><div><p class="font-bold text-neutralDark">Tempat PPL Aktif</p><p class="text-neutralDark/60 font-semibold mt-0.5">SMA Negeri 1 Depok, Sleman, D.I. Yogyakarta</p></div></div>
+                            <div class="flex items-center space-x-4 text-xs sm:text-sm bg-white p-4 rounded-2xl cozy-shadow border border-brandCream/15"><div class="w-10 h-10 bg-brandCreamLight text-brandRed flex items-center justify-center rounded-xl"><i class="fa-solid fa-map-location-dot text-base"></i></div><div><p class="font-bold text-neutralDark">Kota Merantau / Asal</p><p class="text-neutralDark/60 font-semibold mt-0.5">Yogyakarta / Kota Pagaralam, Sumatera Selatan</p></div></div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7 bg-white border border-brandCream/20 rounded-3xl p-6 sm:p-10 cozy-shadow-lg">
+                        <h3 class="font-display font-bold text-xl text-neutralDark mb-6 flex items-center"><i class="fa-solid fa-envelope-open-text mr-3 text-brandRed"></i> Kirim Pesan Cepat</h3>
+                        <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div><label class="block text-xs font-bold uppercase text-neutralDark/70 mb-2" for="form-nama">Nama Lengkap</label><input type="text" id="form-nama" class="w-full p-4 border border-brandCream/50 rounded-xl bg-neutralLight/30 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-brandRed transition-all" placeholder="Nama Anda" required></div>
+                                <div><label class="block text-xs font-bold uppercase text-neutralDark/70 mb-2" for="form-email">Email Valid</label><input type="email" id="form-email" class="w-full p-4 border border-brandCream/50 rounded-xl bg-neutralLight/30 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-brandRed transition-all" placeholder="nama@domain.com" required></div>
+                            </div>
+                            <div><label class="block text-xs font-bold uppercase text-neutralDark/70 mb-2" for="form-instansi">Instansi / Sekolah</label><input type="text" id="form-instansi" class="w-full p-4 border border-brandCream/50 rounded-xl bg-neutralLight/30 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-brandRed transition-all" placeholder="Contoh: SMAN 1 Depok / Universitas Negeri Yogyakarta"></div>
+                            <div><label class="block text-xs font-bold uppercase text-neutralDark/70 mb-2" for="form-pesan">Detail Pesan / Refleksi Rekan Sejawat</label><textarea id="form-pesan" rows="4" class="w-full p-4 border border-brandCream/50 rounded-xl bg-neutralLight/30 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-brandRed transition-all" placeholder="Tulis masukan, saran, atau peluang kolaborasi di sini..." required></textarea></div>
+                            <button type="submit" class="w-full py-4 bg-brandRed hover:bg-brandRedDark text-brandCream hover:text-white font-bold rounded-xl transition-all shadow-md">Kirim Pesan Refleksi</button>
+                        </form>
+                        <div id="form-feedback" class="hidden mt-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-bold rounded-xl"><i class="fa-solid fa-circle-check mr-2"></i>Pesan berhasil terkirim secara simulatif! Terima kasih atas dukungannya untuk pendidikan berkualitas.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-neutralDark text-white/90 py-12 border-t border-brandCream/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <p class="font-display font-bold text-xl text-brandCream">DIAS MAULANA</p>
+            <p class="text-xs text-white/70 max-w-lg mx-auto leading-relaxed font-medium">Guru Informatika Profesional merupakan pionir penentu peradaban digital berwawasan luas. Terus bergerak, tergerak, dan menggerakkan!</p>
+            <div class="flex justify-center space-x-6 text-lg pt-2">
+                <a href="https://github.com/ArtSaid-PGA" target="_blank" class="text-brandCream hover:text-white transition-colors"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.instagram.com/dias_m28?igsh=d2VycHJmOWtmOGdi" target="_blank" class="text-brandCream hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://youtube.com/@diasmaulana7182?si=FWmUGVu9cJjcrsLM" target="_blank" class="text-brandCream hover:text-white transition-colors"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+            <div class="pt-6 border-t border-white/5 text-[10px] text-white/40 font-mono">&copy; 2026 Dias Maulana • E-Portfolio PPG Prajabatan Universitas Negeri Yogyakarta • PPL SMAN 1 Depok, Sleman.</div>
+        </div>
+    </footer>
+
+
+
+    <!-- FITUR TAMBAHAN: PROGRES, QUICK TOOLS, PENCARIAN, DAN LIGHTBOX -->
+    <div id="portfolio-reading-progress" aria-hidden="true">
+        <div id="portfolio-reading-progress-bar"></div>
+    </div>
+
+    <div class="portfolio-floating-tools" aria-label="Alat bantu portofolio">
+        <button type="button" id="portfolio-search-button" class="portfolio-tool-button" title="Cari isi portofolio (Ctrl + K)" aria-label="Cari isi portofolio">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button type="button" id="portfolio-copy-link-button" class="portfolio-tool-button" title="Salin tautan halaman ini" aria-label="Salin tautan halaman ini">
+            <i class="fa-solid fa-link"></i>
+        </button>
+        <button type="button" id="portfolio-top-button" class="portfolio-tool-button" title="Kembali ke atas" aria-label="Kembali ke atas">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <div id="portfolio-search-modal" class="portfolio-overlay" aria-hidden="true">
+        <div class="portfolio-search-dialog" role="dialog" aria-modal="true" aria-labelledby="portfolio-search-heading">
+            <div class="portfolio-search-head">
+                <i class="fa-solid fa-magnifying-glass text-brandRed"></i>
+                <label id="portfolio-search-heading" class="sr-only">Cari isi portofolio</label>
+                <input id="portfolio-search-input" type="search" autocomplete="off" placeholder="Cari materi, refleksi, artefak, atau kata kunci...">
+                <span class="portfolio-shortcut">ESC</span>
+                <button type="button" id="portfolio-search-close" class="text-neutralDark/50 hover:text-brandRed text-lg" aria-label="Tutup pencarian">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="portfolio-search-results" aria-live="polite">
+                <div class="portfolio-search-empty">Ketik kata kunci untuk mencari isi seluruh halaman portofolio.</div>
+            </div>
+            <div class="portfolio-search-foot">
+                <span><i class="fa-solid fa-arrow-turn-down mr-1"></i> Pilih hasil untuk membuka bagian terkait</span>
+                <span>Pencarian mencakup seluruh halaman dan tab artefak</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="portfolio-lightbox" class="portfolio-overlay" aria-hidden="true">
+        <div class="portfolio-lightbox-card" role="dialog" aria-modal="true" aria-label="Pratinjau foto dokumentasi">
+            <button type="button" class="portfolio-lightbox-close" id="portfolio-lightbox-close" aria-label="Tutup foto"><i class="fa-solid fa-xmark"></i></button>
+            <button type="button" class="portfolio-lightbox-nav" id="portfolio-lightbox-prev" aria-label="Foto sebelumnya"><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" class="portfolio-lightbox-nav" id="portfolio-lightbox-next" aria-label="Foto berikutnya"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="portfolio-lightbox-image-wrap">
+                <img id="portfolio-lightbox-image" src="" alt="Foto dokumentasi">
+            </div>
+            <div class="portfolio-lightbox-caption">
+                <span id="portfolio-lightbox-caption">Foto dokumentasi</span>
+                <a id="portfolio-lightbox-drive-link" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-google-drive mr-1"></i> Buka di Google Drive</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="portfolio-toast" class="portfolio-toast" role="status" aria-live="polite"></div>
+
+    <div id="demo-modal" class="fixed inset-0 z-50 bg-neutralDark/60 flex items-center justify-center p-4 hidden">
+        <div class="bg-whiteWarm border border-brandCream/30 max-w-lg w-full rounded-2xl overflow-hidden p-6 space-y-4 shadow-2xl relative">
+            <div class="flex justify-between items-center border-b border-neutralDark/10 pb-3">
+                <h4 class="font-display font-bold text-lg text-brandRed" id="modal-title">Pratinjau Berkas</h4>
+                <button class="text-neutralDark/50 hover:text-brandRed text-xl font-bold transition-colors" onclick="closeDemo()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p class="text-xs sm:text-sm text-neutralDark/80 font-medium leading-relaxed" id="modal-desc">Pratinjau dokumen tiruan berhasil dimuat. Di dalam realisasi portfolio nyata, ini akan menautkan ke dokumen Google Drive berisikan draf yang diunggah secara publik.</p>
+            <div class="p-4 bg-brandCreamLight/50 border border-brandCream/20 rounded-xl text-[11px] font-mono text-neutralDark space-y-1">
+                <p class="font-bold text-brandRed"><i class="fa-solid fa-file mr-1"></i> METADATA FILE:</p>
+                <p><strong>FILE_ID:</strong> UNY-PPG-PPL-SMAN1DEPOK-DIAS</p>
+                <p><strong>STATUS:</strong> VERIFIED BY GURU PAMONG</p>
+                <p><strong>REVISION:</strong> REVISED SIKLUS-3 CAPSTONE</p>
+            </div>
+            <button class="w-full py-3 bg-brandRed text-brandCream hover:bg-brandRedDark hover:text-white text-xs font-bold rounded-lg transition-colors shadow-sm uppercase tracking-wider" onclick="closeDemo()">Tutup Pratinjau</button>
+        </div>
+    </div>
+
+    <script>
+        // =====================================================
+        // KONFIGURASI ID GOOGLE DRIVE — GANTI DENGAN ID ANDA
+        // =====================================================
+        const GOOGLE_DRIVE_IDS = {
+            siklus1: {
+                modul: '1mI0RcGg2UEvWurwV7fOuj6zYRWc2o_LA',
+                media: '1MAcpCdviEGXcNcpM5EsOnAVsZhJTsBJ1'
+            },
+            siklus2: {
+                modul: '1jN1cQLhoVIrjlxxYqZiy-o0MSFhlZZmN',
+                media: '1rgH6-I8ktUXQjDzrq9shAS-3mqRy2YER'
+            },
+            siklus3: {
+                modul: '1_lban58QKGYJAxUIwV5Qr5HaL4djN2Rc',
+                media: '1McDLUrH3QpXhNI9c6GiAgT7_vzQMm_Wx',
+                lkpd: '19ojCoHJMF9SXifnrSDVKAUGR_MOl68gn' // ID LKPD Siklus 3
+            },
+            dokumentasi: {
+                foto: ['1v98GH5GRvMFaDb9ES2A-9VCpAVznQR3H', 
+                '1L8W3U2rZJY4T6zj2KA2xptXVc11A2gEe', 
+                '1EFjyQsA2MlaiMhZ1eGycACbpA7YFOnxQ', 
+                '1lDLwrjhbeikNujwlyvk4YQ5igHewQiwe', 
+                '1HHuNf9ALaZsD2ZrrBujvbDVAAnLiINx5', 
+                '1SNdI7Il5mnvILA9mtMFn5FlN9br5bJia', 
+                '1cRMeWAZahs7msgu0Ez1CI16WEGQcqld1', 
+                '1_KLGY8dgLKby2udnKUVSHXmmBZoDk9Wd', 
+                '17Hft83hjiIIfWKyiGtPcS3SMKHQFXCLW', 
+                '1LucIEaX1d59M7e2oxvbXTTOrn596wdQ4'], // 10 ID foto
+                video: ['1lDLwrjhbeikNujwlyvk4YQ5igHewQiwe', '1SNdI7Il5mnvILA9mtMFn5FlN9br5bJia']
+            },
+
+            penilaian: {
+        lampiran1: '19aT9TF5AmToAgUkFaAlf1jRGtkA3mLFI',   // ← Masukkan ID Google Drive Lampiran 7 (Evaluasi Perangkat)
+        lampiran2: '1iWaG_ox8BORauA0SrDM8A8zOKADD34v9',   // ← Masukkan ID Google Drive Lampiran 8 (Evaluasi Praktik)
+        lampiran3: '12B3Vk6Z_0FPTh374j2itvG8IglA2XFZl'    // ← Masukkan ID Google Drive Lampiran Gabungan (atau file ketiga)
+}
+        };
+
+        function renderGDrivePreview(containerId, fileId, type = 'document') {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            if (!fileId || fileId.trim() === '') {
+                const icons = { 'document': 'fa-file-pdf', 'image': 'fa-image', 'video': 'fa-video' };
+                const labels = { 'document': 'Pratinjau Dokumen', 'image': 'Foto Dokumentasi', 'video': 'Video Dokumentasi' };
+                container.innerHTML = `<div class="preview-placeholder"><i class="fa-solid ${icons[type] || 'fa-file'}"></i><p class="font-display font-bold text-sm">${labels[type] || 'Pratinjau'}</p><p class="text-xs text-neutralDark/50 mt-1">ID Google Drive belum diatur</p></div>`;
+                return;
+            }
+            if (type === 'image') {
+                const thumbnailUrl = `https://drive.google.com/thumbnail?id=${fileId}&sz=w800`;
+                container.innerHTML = `<a href="https://drive.google.com/file/d/${fileId}/view" target="_blank" rel="noopener noreferrer" class="block w-full h-full"><img src="${thumbnailUrl}" alt="Foto Dokumentasi" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<div class=\\'preview-placeholder\\'><i class=\\'fa-solid fa-triangle-exclamation\\'></i><p class=\\'font-display font-bold text-sm\\'>Gagal Memuat Gambar</p></div>'"></a>`;
+            } else if (type === 'video') {
+                const embedUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+                container.innerHTML = `<iframe src="${embedUrl}" allow="autoplay; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:none;" title="Video Dokumentasi"></iframe>`;
+            } else {
+                const embedUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+                container.innerHTML = `<iframe src="${embedUrl}" allow="autoplay" style="width:100%;height:520px;border:none;" title="Pratinjau Dokumen"></iframe>`;
+            }
+        }
+
+        function renderFotoGaleriItem(itemId, fileId, label) {
+            const item = document.getElementById(itemId);
+            if (!item) return;
+            if (!fileId || fileId.trim() === '') return;
+            const thumbnailUrl = `https://drive.google.com/thumbnail?id=${fileId}&sz=w600`;
+            const placeholderDiv = item.querySelector('.preview-placeholder');
+            if (placeholderDiv) placeholderDiv.remove();
+            let imgEl = item.querySelector('img');
+            if (!imgEl) {
+                imgEl = document.createElement('img');
+                imgEl.alt = label;
+                imgEl.className = 'w-full h-full object-cover';
+                imgEl.onerror = function() { this.style.display = 'none';
+                    item.innerHTML =
+                        '<div class="preview-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9b2226;text-align:center;padding:1rem;"><i class="fa-solid fa-triangle-exclamation text-2xl mb-2" style="opacity:0.5;"></i><p class="font-display font-bold text-xs">Gagal Memuat</p></div>'; };
+                item.insertBefore(imgEl, item.firstChild);
+            }
+            imgEl.src = thumbnailUrl;
+            if (!item.querySelector('a')) {
+                const link = document.createElement('a');
+                link.href = `https://drive.google.com/file/d/${fileId}/view`;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.className = 'block w-full h-full absolute inset-0 z-10';
+                link.title = 'Buka di Google Drive';
+                item.appendChild(link);
+            }
+            const overlaySpan = item.querySelector('.foto-overlay span');
+            if (overlaySpan) overlaySpan.textContent = label;
+        }
+
+        function renderAllGDrivePreviews() {
+            // Siklus 1
+            renderGDrivePreview('preview-modul-siklus1', GOOGLE_DRIVE_IDS.siklus1.modul, 'document');
+            renderGDrivePreview('preview-media-siklus1', GOOGLE_DRIVE_IDS.siklus1.media, 'document');
+            // Siklus 2
+            renderGDrivePreview('preview-modul-siklus2', GOOGLE_DRIVE_IDS.siklus2.modul, 'document');
+            renderGDrivePreview('preview-media-siklus2', GOOGLE_DRIVE_IDS.siklus2.media, 'document');
+            // Siklus 3
+            renderGDrivePreview('preview-modul-siklus3', GOOGLE_DRIVE_IDS.siklus3.modul, 'document');
+            renderGDrivePreview('preview-media-siklus3', GOOGLE_DRIVE_IDS.siklus3.media, 'document');
+            renderGDrivePreview('preview-lkpd-siklus3', GOOGLE_DRIVE_IDS.siklus3.lkpd, 'document');
+
+            // Tombol unduh LKPD
+            const lkpdId = GOOGLE_DRIVE_IDS.siklus3.lkpd;
+            const btnDownload = document.getElementById('btn-download-lkpd');
+            if (btnDownload) {
+                if (lkpdId && lkpdId.trim() !== '') {
+                    btnDownload.href = `https://drive.google.com/uc?export=download&id=${lkpdId}`;
+                    btnDownload.style.display = 'inline-block';
+                } else {
+                    btnDownload.style.display = 'none';
+                }
+            }
+
+            // Dokumentasi: 10 foto
+            const fotoLabels = [
+                'Foto Dokumentasi 1', 'Foto Dokumentasi 2', 'Foto Dokumentasi 3', 'Foto Dokumentasi 4', 'Foto Dokumentasi 5',
+                'Foto Dokumentasi 6', 'Foto Dokumentasi 7', 'Foto Dokumentasi 8', 'Foto Dokumentasi 9', 'Foto Dokumentasi 10'
+            ];
+            GOOGLE_DRIVE_IDS.dokumentasi.foto.forEach((fileId, index) => {
+                renderFotoGaleriItem(`foto-item-${index}`, fileId, fotoLabels[index]);
+            });
+            GOOGLE_DRIVE_IDS.dokumentasi.video.forEach((fileId, index) => {
+                renderGDrivePreview(`video-embed-${index}`, fileId, 'video');
+            });
+
+            renderGDrivePreview('preview-lampiran-1', GOOGLE_DRIVE_IDS.penilaian.lampiran1, 'document');
+    renderGDrivePreview('preview-lampiran-2', GOOGLE_DRIVE_IDS.penilaian.lampiran2, 'document');
+    renderGDrivePreview('preview-lampiran-3', GOOGLE_DRIVE_IDS.penilaian.lampiran3, 'document');
+
+        }
+
+        // =====================================================================
+        // KONFIGURASI LINK PPL MANDIRI — SEMESTER 2
+        // =====================================================================
+        // CARA MENGGANTI LINK (cukup ubah URL di antara tanda kutip):
+        // 1. Buka file HTML ini menggunakan VS Code.
+        // 2. Tekan Ctrl + F, cari: KONFIGURASI LINK PPL MANDIRI.
+        // 3. Pilih siklus dan kategori yang ingin diperbarui.
+        // 4. documentUrl = link dokumen utama (RPP/media/LKPD/instrumen).
+        //    analysisUrl = link dokumen keterangan analisis (analisis, tujuan,
+        //    kelebihan, dan kekurangan). Keduanya boleh memakai link yang sama.
+        // 5. Simpan file. Preview dan tombol unduh akan menyesuaikan otomatis.
+        //
+        // Bisa tempel link berbagi Google Drive atau Google Docs/Sheets/Slides.
+        // Jika suatu dokumen belum tersedia, isi URL-nya dengan string kosong.
+        // Pastikan izin file Google Drive: Siapa saja yang memiliki link = Viewer.
+        // =====================================================================
+        const PPL_MANDIRI_LINKS = {
+            siklus1: {
+                rpp     : { documentUrl: 'https://drive.google.com/file/d/1k0g6zxIFwQPnU81PjbYtDklIBiOt_sYt/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' },
+                media   : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' },
+                lkpd    : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' },
+                asesmen : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' }
+            },
+            siklus2: {
+                rpp     : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' },
+                media   : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' },
+                lkpd    : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' },
+                asesmen : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' }
+            },
+            siklus3: {
+                rpp     : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' },
+                media   : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' },
+                lkpd    : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' },
+                asesmen : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' }
+            },
+            siklus4: {
+                rpp     : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' },
+                media   : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' },
+                lkpd    : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' },
+                asesmen : { documentUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link', analysisUrl: 'https://drive.google.com/file/d/17u-cic41pFTiD_Of3iF4-rR2CJvFNTsT/view?usp=drive_link' }
+            }
+        };
+
+        // Membaca ID dari link Google Drive atau Google Workspace.
+        function getGoogleDriveFileInfo(rawUrl) {
+            if (!rawUrl || typeof rawUrl !== 'string') return null;
+            try {
+                const url = new URL(rawUrl.trim());
+                const host = url.hostname.toLowerCase();
+                if (!host.endsWith('google.com') && !host.endsWith('googleusercontent.com')) return null;
+
+                const workspaceMatch = url.pathname.match(/^\/(document|spreadsheets|presentation)\/(?:u\/\d+\/)?d\/([^/]+)/);
+                if (workspaceMatch) {
+                    return { id: workspaceMatch[2], type: workspaceMatch[1], workspace: true };
+                }
+                const drivePathMatch = url.pathname.match(/\/(?:file\/)?d\/([^/]+)/);
+                const fileId = drivePathMatch?.[1] || url.searchParams.get('id');
+                return fileId ? { id: fileId, type: 'file', workspace: false } : null;
+            } catch (error) {
+                console.warn('Link Google Drive tidak valid:', error);
+                return null;
+            }
+        }
+
+        function getDrivePreviewUrl(rawUrl) {
+            const info = getGoogleDriveFileInfo(rawUrl);
+            if (!info) return rawUrl || '';
+            return info.workspace
+                ? `https://docs.google.com/${info.type}/d/${info.id}/preview`
+                : `https://drive.google.com/file/d/${info.id}/preview`;
+        }
+
+        function getDriveDownloadUrl(rawUrl) {
+            const info = getGoogleDriveFileInfo(rawUrl);
+            if (!info) return rawUrl || '';
+            return info.workspace
+                ? `https://docs.google.com/${info.type}/d/${info.id}/export?format=pdf`
+                : `https://drive.google.com/uc?export=download&id=${info.id}`;
+        }
+
+        // Video dokumentasi mengajar ditampilkan khusus pada Siklus 3 (UTS) dan Siklus 4 (UAS).
+        // Kedua siklus memakai tautan YouTube yang diberikan.
+        const PPL_MANDIRI_VIDEOS = {
+            siklus3: 'https://www.youtube.com/watch?v=6TO1mii5u38&feature=youtu.be',
+            siklus4: 'https://www.youtube.com/watch?v=7movpNp5L6g&feature=youtu.be'
+        };
+
+        function getYouTubeVideoId(videoUrl) {
+            try {
+                const parsedUrl = new URL(videoUrl);
+                if (parsedUrl.hostname === 'youtu.be' || parsedUrl.hostname.endsWith('.youtu.be')) {
+                    return parsedUrl.pathname.split('/').filter(Boolean)[0] || '';
+                }
+                return parsedUrl.searchParams.get('v')
+                    || (parsedUrl.pathname.match(/\/embed\/([^/]+)/) || [])[1]
+                    || '';
+            } catch (error) {
+                console.warn('URL video YouTube tidak valid:', error);
+                return '';
+            }
+        }
+
+        const PPL_MANDIRI_CYCLES = {
+            siklus1: { label: 'Siklus 1', phase: '', video: false },
+            siklus2: { label: 'Siklus 2', phase: '', video: false },
+            siklus3: { label: 'Siklus 3', phase: 'UTS', video: true },
+            siklus4: { label: 'Siklus 4', phase: 'UAS', video: true }
+        };
+        const PPL_MANDIRI_CATEGORIES = {
+            rpp: { label: 'Modul Ajar/RPP', icon: 'fa-file-lines', intro: 'Dokumen modul ajar atau RPP pada siklus ini.' },
+            media: { label: 'Media Pembelajaran', icon: 'fa-display', intro: 'Dokumen atau media pembelajaran yang digunakan pada siklus ini.' },
+            lkpd: { label: 'LKPD', icon: 'fa-clipboard-list', intro: 'Lembar Kerja Peserta Didik pada siklus ini.' },
+            asesmen: { label: 'Instrumen Asesmen', icon: 'fa-list-check', intro: 'Instrumen asesmen yang digunakan untuk memperoleh informasi hasil belajar.' }
+        };
+        let activePPLView = 'cycles';
+        let activePPLCycle = 'siklus1';
+        let activePPLCategory = 'rpp';
+
+        function renderPPLMandiri() {
+            const content = document.getElementById('ppl-mandiri-content');
+            const cycleHeading = document.getElementById('ppl-cycle-heading');
+            const cyclesPanel = document.getElementById('ppl-cycles-panel');
+            const nonmengajarPanel = document.getElementById('ppl-nonmengajar-panel');
+            if (!content || !cycleHeading || !cyclesPanel || !nonmengajarPanel) return;
+
+            cyclesPanel.classList.toggle('hidden', activePPLView !== 'cycles');
+            nonmengajarPanel.classList.toggle('hidden', activePPLView !== 'nonmengajar');
+            document.querySelectorAll('[data-ppl-view]').forEach(button => {
+                const selected = button.dataset.pplView === activePPLView;
+                button.classList.toggle('is-active', selected);
+                button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+            });
+
+            if (activePPLView === 'nonmengajar') return;
+
+            const cycle = PPL_MANDIRI_CYCLES[activePPLCycle];
+            const category = PPL_MANDIRI_CATEGORIES[activePPLCategory];
+            if (!cycle || !category) return;
+
+            cycleHeading.textContent = cycle.phase ? `${cycle.label} (${cycle.phase})` : cycle.label;
+            document.querySelectorAll('[data-ppl-cycle]').forEach(button => {
+                button.classList.toggle('is-active', button.dataset.pplCycle === activePPLCycle);
+                button.setAttribute('aria-pressed', button.dataset.pplCycle === activePPLCycle ? 'true' : 'false');
+            });
+            document.querySelectorAll('[data-ppl-category]').forEach(button => {
+                button.classList.toggle('is-active', button.dataset.pplCategory === activePPLCategory);
+                button.setAttribute('aria-pressed', button.dataset.pplCategory === activePPLCategory ? 'true' : 'false');
+            });
+
+
+            const fileEntry = PPL_MANDIRI_LINKS[activePPLCycle]?.[activePPLCategory];
+            if (!fileEntry || !fileEntry.documentUrl) {
+                content.innerHTML = `<div class="p-6 rounded-2xl border border-dashed border-brandCream/70 bg-brandCreamLight/50 text-center text-xs text-neutralDark/65">Tautan dokumen untuk kategori ini belum ditambahkan.</div>`;
+                return;
+            }
+            const viewUrl = fileEntry.documentUrl;
+            const analysisUrl = fileEntry.analysisUrl || fileEntry.documentUrl;
+            const fileInfo = getGoogleDriveFileInfo(viewUrl);
+            const analysisInfo = getGoogleDriveFileInfo(analysisUrl);
+            const previewUrl = getDrivePreviewUrl(viewUrl);
+            const downloadUrl = getDriveDownloadUrl(viewUrl);
+            const analysisDownloadUrl = getDriveDownloadUrl(analysisUrl);
+            const analysisIsSameFile = analysisUrl === viewUrl || (fileInfo?.id && analysisInfo?.id && fileInfo.id === analysisInfo.id);
+            const analysisPreview = analysisIsSameFile
+                ? `<p class="text-[11px] text-neutralDark/60 leading-relaxed">Tautan keterangan analisis sama dengan dokumen utama. Untuk menampilkan file analisis terpisah, ganti kolom analysisUrl pada konfigurasi link PPL Mandiri.</p>`
+                : `<div class="gdrive-preview-container mt-3"><iframe class="ppl-analysis-preview" src="${getDrivePreviewUrl(analysisUrl)}" title="Pratinjau keterangan analisis ${category.label} ${cycle.label}" loading="lazy"></iframe></div>`;
+            const currentVideoUrl = PPL_MANDIRI_VIDEOS[activePPLCycle];
+            const currentVideoId = currentVideoUrl ? getYouTubeVideoId(currentVideoUrl) : '';
+            // Dokumentasi video tampil di bawah artefak untuk seluruh kategori Siklus 3 dan 4,
+            // bukan hanya ketika tab Media Pembelajaran sedang dipilih.
+            const videoBlock = cycle.video && currentVideoId ? `
+                <section class="p-5 sm:p-6 border-t border-brandCream/30" aria-label="Dokumentasi video ${cycle.label}">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+                        <div>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-brandRed"><i class="fa-solid fa-circle-play mr-1"></i> DOKUMENTASI VIDEO MENGAJAR</p>
+                            <h5 class="font-display font-bold text-base text-neutralDark mt-1">Video Mengajar · ${cycle.label} (${cycle.phase})</h5>
+                            <p class="text-xs text-neutralDark/60 mt-1">Pratinjau video dokumentasi praktik mengajar.</p>
+                        </div>
+                        <a class="ppl-action-link ppl-secondary self-start" href="${currentVideoUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> Buka YouTube</a>
+                    </div>
+                    <div class="video-embed-container aspect-ratio-16-9">
+                        <iframe class="ppl-video-frame" src="https://www.youtube-nocookie.com/embed/${currentVideoId}" title="Video dokumentasi mengajar ${cycle.label} (${cycle.phase})" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </section>` : '';
+
+            content.innerHTML = `
+                <article class="ppl-resource-card">
+                    <div class="p-5 sm:p-6 border-b border-brandCream/30">
+                        <div class="flex items-start gap-3">
+                            <div class="w-11 h-11 flex-shrink-0 rounded-xl bg-brandRed text-brandCream flex items-center justify-center text-lg"><i class="fa-solid ${category.icon}"></i></div>
+                            <div class="min-w-0 flex-1">
+                                <p class="text-[10px] uppercase tracking-widest text-brandRed font-bold">${cycle.phase ? `${cycle.label} · ${cycle.phase}` : cycle.label}</p>
+                                <h4 class="font-display font-bold text-lg sm:text-xl text-neutralDark mt-1">${category.label}</h4>
+                                <p class="text-xs text-neutralDark/60 mt-1">${category.intro}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+                        <div class="lg:col-span-8 p-4 sm:p-5">
+                            <div class="flex items-center justify-between gap-3 mb-3">
+                                <h5 class="font-display font-bold text-sm text-neutralDark"><i class="fa-solid fa-file-pdf text-brandRed mr-2"></i>Pratinjau Dokumen</h5>
+                                <span class="text-[10px] text-neutralDark/45 font-semibold">Google Drive PDF / dokumen</span>
+                            </div>
+                            <div class="gdrive-preview-container">
+                                <iframe class="ppl-resource-preview" src="${previewUrl}" title="Pratinjau ${category.label} ${cycle.label}" loading="lazy" allow="autoplay"></iframe>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                <a class="ppl-action-link" href="${downloadUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-download"></i> Unduh Dokumen</a>
+                                <a class="ppl-action-link ppl-secondary" href="${viewUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-google-drive"></i> Buka Google Drive</a>
+                            </div>
+                        </div>
+                        <aside class="lg:col-span-4 p-4 sm:p-5 bg-brandCreamLight/45 border-t lg:border-t-0 lg:border-l border-brandCream/30">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-magnifying-glass-chart text-brandRed"></i>
+                                <h5 class="font-display font-bold text-sm text-neutralDark">Keterangan Analisis</h5>
+                            </div>
+                            <p class="text-xs text-neutralDark/70 leading-relaxed">Keterangan mengenai analisis, tujuan, kelebihan, dan kekurangan tersedia melalui tautan keterangan yang diberikan.</p>
+                            ${analysisPreview}
+                            <div class="mt-4 p-3 rounded-xl bg-whiteWarm border border-brandCream/40">
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-brandRed">Komponen analisis</p>
+                                <ul class="mt-2 space-y-2 text-xs text-neutralDark/75">
+                                    <li class="flex gap-2"><i class="fa-solid fa-magnifying-glass-chart text-brandRed mt-0.5"></i><span>Analisis</span></li>
+                                    <li class="flex gap-2"><i class="fa-solid fa-bullseye text-brandRed mt-0.5"></i><span>Tujuan</span></li>
+                                    <li class="flex gap-2"><i class="fa-solid fa-circle-check text-brandRed mt-0.5"></i><span>Kelebihan</span></li>
+                                    <li class="flex gap-2"><i class="fa-solid fa-triangle-exclamation text-brandRed mt-0.5"></i><span>Kekurangan</span></li>
+                                </ul>
+                            </div>
+                            <div class="flex flex-col gap-2 mt-4">
+                                <a class="ppl-action-link ppl-secondary w-full" href="${analysisUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Keterangan Analisis</a>
+                                <a class="ppl-action-link w-full" href="${analysisDownloadUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-download"></i> Unduh Keterangan</a>
+                            </div>
+                            <p class="text-[10px] text-neutralDark/45 mt-3 leading-relaxed">Pratinjau memerlukan izin akses Google Drive. Unduhan mengikuti pengaturan berbagi file pemilik.</p>
+                        </aside>
+                    </div>
+                    ${videoBlock}
+                </article>`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[data-ppl-view]').forEach(button => {
+                button.addEventListener('click', () => {
+                    activePPLView = button.dataset.pplView;
+                    renderPPLMandiri();
+                });
+            });
+            document.querySelectorAll('[data-ppl-cycle]').forEach(button => {
+                button.addEventListener('click', () => {
+                    activePPLCycle = button.dataset.pplCycle;
+                    renderPPLMandiri();
+                });
+            });
+            document.querySelectorAll('[data-ppl-category]').forEach(button => {
+                button.addEventListener('click', () => {
+                    activePPLCategory = button.dataset.pplCategory;
+                    renderPPLMandiri();
+                });
+            });
+            renderPPLMandiri();
+        });
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+        const PDF_URL = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+        let pdfDoc = null;
+        let currentPage = 1;
+
+        window.onload = function() {
+            const loadingPage = document.getElementById('loading-page');
+            const loadingPercent = document.getElementById('loading-percent');
+            const loadingBar = document.getElementById('loading-bar');
+            let percent = 0;
+            const interval = setInterval(() => {
+                percent += Math.floor(Math.random() * 15) + 5;
+                if (percent >= 100) { percent = 100;
+                    clearInterval(interval);
+                    loadPDF();
+                    renderAllGDrivePreviews();
+                    setTimeout(() => { loadingPage.classList.add('opacity-0');
+                        setTimeout(() => { loadingPage.style.display = 'none'; }, 500); }, 400); }
+                loadingPercent.innerText = `${percent}%`;
+                loadingBar.style.width = `${percent}%`;
+            }, 120);
+        };
+
+        async function loadPDF() {
+            try {
+                document.getElementById('canvas-container').innerHTML =
+                    '<div class="text-center text-neutralDark/50"><i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i><p class="text-sm">Memuat dokumen PDF...</p></div>';
+                const pdf = await pdfjsLib.getDocument(PDF_URL).promise;
+                pdfDoc = pdf;
+                currentPage = 1;
+                document.getElementById('page-count').innerText = pdf.numPages;
+                await renderPage();
+            } catch (error) {
+                document.getElementById('canvas-container').innerHTML =
+                    '<div class="text-center text-red-500"><i class="fa-solid fa-exclamation-triangle text-2xl mb-2"></i><p class="text-sm">Gagal memuat PDF. Pastikan file PDF tersedia.</p></div>';
+            }
+        }
+
+        async function renderPage() {
+            if (!pdfDoc) return;
+            try {
+                const page = await pdfDoc.getPage(currentPage);
+                let canvas = document.getElementById('pdf-canvas');
+                if (!canvas) { const container = document.getElementById('canvas-container');
+                    container.innerHTML = '';
+                    canvas = document.createElement('canvas');
+                    canvas.id = 'pdf-canvas';
+                    container.appendChild(canvas); }
+                const context = canvas.getContext('2d');
+                const maxWidth = document.getElementById('canvas-container').clientWidth - 40;
+                const viewport = page.getViewport({ scale: 1 });
+                const scale = maxWidth / viewport.width;
+                const scaledViewport = page.getViewport({ scale: scale });
+                canvas.width = scaledViewport.width;
+                canvas.height = scaledViewport.height;
+                await page.render({ canvasContext: context, viewport: scaledViewport }).promise;
+                document.getElementById('page-num').innerText = currentPage;
+            } catch (error) { console.error(error); }
+        }
+
+        function changePage(delta) { if (!pdfDoc) return;
+            const newPage = currentPage + delta; if (newPage >= 1 && newPage <= pdfDoc.numPages) { currentPage = newPage;
+                renderPage(); } }
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+        mobileMenuBtn.addEventListener('click', () => { mobileDrawer.classList.toggle('hidden'); });
+
+        function toggleMobileMenu() { mobileDrawer.classList.add('hidden'); }
+
+        function navigateToPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden-view'));
+            const target = document.getElementById(`view-${pageId}`);
+            if (target) target.classList.remove('hidden-view');
+            document.querySelectorAll('.nav-link').forEach(l => { if (l.id === 'nav-kontak') return;
+                l.className =
+                    "nav-link px-4 py-2 text-neutralDark/75 hover:text-brandRed hover:bg-neutralLight rounded-lg transition-all"; });
+            const activeLink = document.getElementById(`nav-${pageId}`);
+            if (activeLink && pageId !== 'kontak') activeLink.className =
+                "nav-link px-4 py-2 text-brandRed bg-brandRedLight rounded-lg font-bold transition-all";
+            document.querySelectorAll('.mobile-nav-link').forEach(l => l.className =
+                "mobile-nav-link block w-full text-left px-4 py-3 rounded-xl text-neutralDark/75 font-display font-medium hover:bg-neutralLight"
+                );
+            const activeMob = document.querySelector(`.mobile-nav-link[onclick*="navigateToPage('${pageId}')"]`);
+            if (activeMob && pageId !== 'kontak') activeMob.className =
+                "mobile-nav-link block w-full text-left px-4 py-3 rounded-xl text-brandRed font-display font-bold bg-brandRedLight";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (pageId === 'artefak') setTimeout(renderAllGDrivePreviews, 300);
+            if (pageId === 'ppl-mandiri') setTimeout(renderPPLMandiri, 50);
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.artifact-content-panel').forEach(p => p.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+            document.querySelectorAll('.artifact-tab-btn').forEach(b => b.className =
+                "artifact-tab-btn p-3 bg-whiteWarm text-neutralDark font-display font-bold text-xs sm:text-sm rounded-xl border border-brandCream/25 shadow-sm transition-all hover:bg-brandCreamLight"
+                );
+            const btnMap = { 'tab-modul': 'btn-tab-modul', 'tab-media': 'btn-tab-media', 'tab-kerja': 'btn-tab-kerja',
+                'tab-video': 'btn-tab-video' };
+            const activeBtn = document.getElementById(btnMap[tabId]);
+            if (activeBtn) activeBtn.className =
+                "artifact-tab-btn p-3 bg-brandRed text-brandCream font-display font-bold text-xs sm:text-sm rounded-xl border border-brandRed/10 shadow-sm transition-all";
+            if (tabId === 'tab-video') setTimeout(() => GOOGLE_DRIVE_IDS.dokumentasi.video.forEach((f, i) => renderGDrivePreview(
+                `video-embed-${i}`, f, 'video')), 100);
+        }
+
+        function openDemo(name) { document.getElementById('modal-title').innerText = `Simulasi Akses: ${name}`;
+            document.getElementById('demo-modal').classList.remove('hidden'); }
+
+        function closeDemo() { document.getElementById('demo-modal').classList.add('hidden'); }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            document.getElementById('form-feedback').classList.remove('hidden');
+            ['form-nama', 'form-email', 'form-instansi', 'form-pesan'].forEach(id => document.getElementById(id).value = '');
+            setTimeout(() => document.getElementById('form-feedback').classList.add('hidden'), 5000);
+        }
+
+
+        // =====================================================
+        // FITUR TAMBAHAN PORTOFOLIO — TANPA MENGUBAH KONTEN
+        // =====================================================
+        (function initPortfolioEnhancements() {
+            const PAGE_LABELS = {
+                home: 'Beranda',
+                profil: 'Profil & Daerah',
+                artefak: 'Artefak & Analisis',
+                penilaian: 'Hasil Penilaian',
+                refleksi: 'Refleksi Akhir',
+                'ppl-mandiri': 'PPL Mandiri',
+                kontak: 'Kontak Saya'
+            };
+            const PAGE_IDS = Object.keys(PAGE_LABELS);
+            let activePage = 'home';
+            let toastTimer = null;
+            let lightboxItems = [];
+            let lightboxIndex = 0;
+
+            const searchModal = document.getElementById('portfolio-search-modal');
+            const searchInput = document.getElementById('portfolio-search-input');
+            const searchResults = document.getElementById('portfolio-search-results');
+            const lightbox = document.getElementById('portfolio-lightbox');
+            const lightboxImage = document.getElementById('portfolio-lightbox-image');
+            const lightboxCaption = document.getElementById('portfolio-lightbox-caption');
+            const lightboxDriveLink = document.getElementById('portfolio-lightbox-drive-link');
+            const toast = document.getElementById('portfolio-toast');
+
+            function showToast(message) {
+                if (!toast) return;
+                toast.textContent = message;
+                toast.classList.add('is-visible');
+                window.clearTimeout(toastTimer);
+                toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 2400);
+            }
+
+            function openSearch() {
+                searchModal.classList.add('is-open');
+                searchModal.setAttribute('aria-hidden', 'false');
+                window.setTimeout(() => searchInput.focus(), 50);
+            }
+
+            function closeSearch() {
+                searchModal.classList.remove('is-open');
+                searchModal.setAttribute('aria-hidden', 'true');
+            }
+
+            function buildSearchIndex(query) {
+                const normalizedQuery = query.trim().toLocaleLowerCase('id');
+                if (normalizedQuery.length < 2) return [];
+                const terms = normalizedQuery.split(/\s+/).filter(Boolean);
+                const entries = [];
+                const seen = new Set();
+
+                document.querySelectorAll('.page-view').forEach(page => {
+                    const pageId = page.id.replace('view-', '');
+                    if (!PAGE_LABELS[pageId]) return;
+
+                    page.querySelectorAll('h1, h2, h3, h4, h5, p, li, a, button').forEach(element => {
+                        if (element.closest('#portfolio-search-modal, #portfolio-lightbox')) return;
+                        const text = (element.innerText || element.textContent || '').replace(/\s+/g, ' ').trim();
+                        if (text.length < 3) return;
+                        const normalizedText = text.toLocaleLowerCase('id');
+                        if (!terms.every(term => normalizedText.includes(term))) return;
+
+                        const key = `${pageId}|${normalizedText}`;
+                        if (seen.has(key)) return;
+                        seen.add(key);
+
+                        let score = terms.length;
+                        if (normalizedText.includes(normalizedQuery)) score += 8;
+                        if (/^h[1-5]$/.test(element.tagName.toLowerCase())) score += 3;
+                        entries.push({
+                            pageId,
+                            pageLabel: PAGE_LABELS[pageId],
+                            element,
+                            panel: element.closest('.artifact-content-panel'),
+                            text,
+                            score
+                        });
+                    });
+                });
+
+                return entries.sort((a, b) => b.score - a.score || a.text.length - b.text.length).slice(0, 12);
+            }
+
+            function renderSearchResults(query) {
+                const trimmed = query.trim();
+                searchResults.innerHTML = '';
+                if (trimmed.length < 2) {
+                    const empty = document.createElement('div');
+                    empty.className = 'portfolio-search-empty';
+                    empty.textContent = 'Masukkan minimal 2 karakter untuk mulai mencari.';
+                    searchResults.appendChild(empty);
+                    return;
+                }
+
+                const results = buildSearchIndex(trimmed);
+                if (!results.length) {
+                    const empty = document.createElement('div');
+                    empty.className = 'portfolio-search-empty';
+                    empty.innerHTML = '<i class="fa-regular fa-face-frown text-2xl mb-2 block"></i> Tidak ditemukan hasil yang cocok. Coba kata kunci lain.';
+                    searchResults.appendChild(empty);
+                    return;
+                }
+
+                results.forEach(entry => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'portfolio-search-result';
+                    const label = document.createElement('strong');
+                    label.textContent = `${entry.pageLabel}${entry.panel ? ' · ' + (entry.panel.querySelector('h3')?.innerText || 'Artefak') : ''}`;
+                    const snippet = document.createElement('span');
+                    snippet.textContent = entry.text.length > 210 ? `${entry.text.slice(0, 207)}...` : entry.text;
+                    button.append(label, snippet);
+                    button.addEventListener('click', () => openSearchResult(entry));
+                    searchResults.appendChild(button);
+                });
+            }
+
+            function openSearchResult(entry) {
+                closeSearch();
+                if (entry.panel && entry.panel.classList.contains('hidden')) {
+                    switchTab(entry.panel.id);
+                }
+                navigateToPage(entry.pageId);
+                window.setTimeout(() => {
+                    entry.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    entry.element.classList.add('portfolio-search-highlight');
+                    window.setTimeout(() => entry.element.classList.remove('portfolio-search-highlight'), 3000);
+                }, 420);
+            }
+
+            document.getElementById('portfolio-search-button').addEventListener('click', openSearch);
+            document.getElementById('portfolio-search-close').addEventListener('click', closeSearch);
+            document.getElementById('portfolio-search-button').addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') openSearch();
+            });
+            searchInput.addEventListener('input', event => renderSearchResults(event.target.value));
+            searchModal.addEventListener('click', event => {
+                if (event.target === searchModal) closeSearch();
+            });
+
+            // Tautan halaman langsung (#profil, #artefak, dan seterusnya) + tombol Back/Forward browser.
+            const originalNavigateToPage = window.navigateToPage;
+            window.navigateToPage = function(pageId) {
+                if (!PAGE_LABELS[pageId]) return;
+                activePage = pageId;
+                originalNavigateToPage(pageId);
+                const nextHash = `#${pageId}`;
+                if (window.location.hash !== nextHash) {
+                    window.history.pushState({ portfolioPage: pageId }, '', nextHash);
+                }
+            };
+
+            function pageFromHash() {
+                const raw = decodeURIComponent(window.location.hash.replace(/^#/, '')).replace(/^view-/, '');
+                return PAGE_IDS.includes(raw) ? raw : 'home';
+            }
+
+            window.addEventListener('popstate', () => {
+                activePage = pageFromHash();
+                originalNavigateToPage(activePage);
+            });
+            window.addEventListener('load', () => {
+                const initialPage = pageFromHash();
+                if (initialPage !== 'home') {
+                    activePage = initialPage;
+                    originalNavigateToPage(initialPage);
+                }
+                updateReadingProgress();
+            });
+
+            // Salin tautan langsung ke halaman yang sedang dibuka.
+            async function copyCurrentPageLink() {
+                const url = `${window.location.origin}${window.location.pathname}#${activePage}`;
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(url);
+                    } else {
+                        const helper = document.createElement('textarea');
+                        helper.value = url;
+                        helper.style.position = 'fixed';
+                        helper.style.opacity = '0';
+                        document.body.appendChild(helper);
+                        helper.select();
+                        const copied = document.execCommand('copy');
+                        helper.remove();
+                        if (!copied) throw new Error('Clipboard tidak tersedia');
+                    }
+                    showToast('Tautan halaman berhasil disalin.');
+                } catch (error) {
+                    showToast('Tidak dapat menyalin otomatis. Salin tautan dari bilah alamat.');
+                }
+            }
+            document.getElementById('portfolio-copy-link-button').addEventListener('click', copyCurrentPageLink);
+
+            // Indikator progres baca dan tombol kembali ke atas.
+            const progressBar = document.getElementById('portfolio-reading-progress-bar');
+            const topButton = document.getElementById('portfolio-top-button');
+            function updateReadingProgress() {
+                const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0;
+                progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+                topButton.classList.toggle('is-visible', window.scrollY > 420);
+            }
+            window.addEventListener('scroll', updateReadingProgress, { passive: true });
+            window.addEventListener('resize', updateReadingProgress);
+            topButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+            // Galeri foto: klik thumbnail untuk membuka lightbox, dengan tautan asli Google Drive.
+            function getGalleryItems() {
+                return Array.from(document.querySelectorAll('#galeri-foto-container .foto-galeri-item')).filter(item => item.querySelector('img'));
+            }
+
+            function showLightboxItem(index) {
+                if (!lightboxItems.length) return;
+                lightboxIndex = (index + lightboxItems.length) % lightboxItems.length;
+                const item = lightboxItems[lightboxIndex];
+                const image = item.querySelector('img');
+                const link = item.querySelector('a[href*="drive.google.com/file/d/"]');
+                if (!image || !link) return;
+                const fileMatch = link.href.match(/\/d\/([^/]+)/);
+                const fileId = fileMatch ? fileMatch[1] : '';
+                lightboxImage.src = fileId ? `https://drive.google.com/thumbnail?id=${fileId}&sz=w1600` : image.src;
+                lightboxImage.alt = image.alt || `Foto dokumentasi ${lightboxIndex + 1}`;
+                lightboxCaption.textContent = image.alt || `Foto Dokumentasi ${lightboxIndex + 1}`;
+                lightboxDriveLink.href = link.href;
+            }
+
+            function openLightbox(item) {
+                lightboxItems = getGalleryItems();
+                const index = lightboxItems.indexOf(item);
+                if (index < 0) return;
+                showLightboxItem(index);
+                lightbox.classList.add('is-open');
+                lightbox.setAttribute('aria-hidden', 'false');
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('is-open');
+                lightbox.setAttribute('aria-hidden', 'true');
+                lightboxImage.removeAttribute('src');
+            }
+
+            const gallery = document.getElementById('galeri-foto-container');
+            if (gallery) {
+                gallery.addEventListener('click', event => {
+                    const driveLink = event.target.closest('a[href*="drive.google.com/file/"]');
+                    if (!driveLink) return;
+                    const item = driveLink.closest('.foto-galeri-item');
+                    if (!item) return;
+                    event.preventDefault();
+                    openLightbox(item);
+                });
+            }
+            document.getElementById('portfolio-lightbox-close').addEventListener('click', closeLightbox);
+            document.getElementById('portfolio-lightbox-prev').addEventListener('click', () => showLightboxItem(lightboxIndex - 1));
+            document.getElementById('portfolio-lightbox-next').addEventListener('click', () => showLightboxItem(lightboxIndex + 1));
+            lightbox.addEventListener('click', event => {
+                if (event.target === lightbox) closeLightbox();
+            });
+
+            // Pintasan keyboard: Ctrl/Cmd + K, Alt + angka 1-7, Escape, dan panah galeri.
+            document.addEventListener('keydown', event => {
+                const target = event.target;
+                const isTyping = target && (target.matches('input, textarea, select') || target.isContentEditable);
+                if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+                    event.preventDefault();
+                    openSearch();
+                    return;
+                }
+                if (event.key === 'Escape') {
+                    closeSearch();
+                    closeLightbox();
+                    if (!document.getElementById('demo-modal').classList.contains('hidden')) closeDemo();
+                    return;
+                }
+                if (lightbox.classList.contains('is-open')) {
+                    if (event.key === 'ArrowLeft') showLightboxItem(lightboxIndex - 1);
+                    if (event.key === 'ArrowRight') showLightboxItem(lightboxIndex + 1);
+                    return;
+                }
+                if (!isTyping && event.altKey && /^[1-7]$/.test(event.key)) {
+                    event.preventDefault();
+                    navigateToPage(PAGE_IDS[Number(event.key) - 1]);
+                }
+            });
+
+            // Memastikan indikator awal sinkron ketika halaman pertama kali dibuka.
+            updateReadingProgress();
+        })();
+
+    </script>
+</body>
+</html>
